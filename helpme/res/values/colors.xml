@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_grey">#f0f0f0</color>
+    <color name="super_light_grey">#f6f6f6</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="light_blue">#03a9f4</color>
+    <color name="green">#259b24</color>
+    <color name="orange">#ff9800</color>
+    <color name="red">#e51c23</color>
+    
+    <color name="gray">#808A87</color><!--灰色 -->
+	<color name="dark_gray">#585858</color><!--深灰色 -->
+	<color name="chenghuang">#FF9912</color><!--澄黄色-->
+	<color name="huise">#DADADA</color><!--灰色 -->
+	<color name="bar">#999999</color><!--状态栏颜色-->
+	<color name="tabhost">#F0F0F0</color><!--低栏背景色-->
+	<color name="tabhost1">#999999</color><!--低栏分割栏颜色-->
+	<color name="tabtext1">#6D6D6D</color><!--灰色底栏字体-->
+	<color name="tabtext2">#525252</color><!--橙色底栏字体-->
+	<color name="bg">#F0F0F0</color><!--背景色-->
+	<color name="item_normal">#FFFFFF</color><!--item_normal背景色-->
+	<color name="item_press">#DDDDDD</color><!--item_press背景色-->
+	
+	
+    <color name="actionbar_selected">#F0F0F0</color>
+</resources>

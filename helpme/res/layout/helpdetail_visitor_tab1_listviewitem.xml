@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent" >
+
+            <jeese.helpme.view.CircleImageView
+                android:id="@+id/helpdetail_visitor_tab1_listviewitem_headimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:padding="2dp" />
+
+            <ImageButton
+                android:id="@+id/helpdetail_visitor_tab1_listviewitem_headimagebutton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:scaleType="fitXY" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/helpdetail_visitor_tab1_listviewitem_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1dp"
+                    android:text="伊丽莎白·李大娘"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/helpdetail_visitor_tab1_listviewitem_seximage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/female" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/helpdetail_visitor_tab1_listviewitem_sendtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:alpha="0.54"
+                    android:text="昨天 12：30"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/helpdetail_visitor_tab1_listviewitem_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="58dp"
+            android:text="目击众神死亡的草原上野花一片\n远在远方的风比远方更远\n我的琴声呜咽 泪水全无\n我把这远方的远归还草原\n一个叫木头 一个叫马尾\n我的琴声呜咽 泪水全无\n远方只有在死亡中凝聚野花一片\n明月如镜高悬草原映照千年岁月\n我的琴声呜咽 泪水全无\n只身打马过草原"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="30dp"
+        android:alpha="0.54"
+        android:background="@color/black" />
+
+</LinearLayout>

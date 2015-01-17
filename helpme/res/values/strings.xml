@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">易助</string>
+    <string name="buttom_home">易助</string>
+    <string name="buttom_discover">发现</string>
+    <string name="buttom_help">求助</string>
+    <string name="buttom_people">人脉</string>
+    <string name="buttom_me">我</string>
+    <string name="actionbar_home_tab1">重要</string>
+    <string name="actionbar_home_tab2">求助</string>
+    <string name="actionbar_home_tab3">提问</string>
+    <string name="actionbar_home_tab4">收藏</string>
+    <string name="actionbar_helpdetail_tab1">详情</string>
+    <string name="actionbar_helpdetail_tab2">进度</string>
+    
+</resources>

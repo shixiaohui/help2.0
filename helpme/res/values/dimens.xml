@@ -1,0 +1,5 @@
+    <resources>
+    
+    <dimen name="dp">10dp</dimen>
+    <dimen name="normal_text_size">25sp</dimen>
+        </resources>
