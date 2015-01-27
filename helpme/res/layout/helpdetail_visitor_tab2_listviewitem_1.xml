@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="match_parent" >
+
+            <jeese.helpme.view.CircleImageView
+                android:id="@+id/helpdetail_visitor_tab2_listviewitem_headimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:padding="2dp" />
+
+            <ImageButton
+                android:id="@+id/helpdetail_visitor_tab2_listviewitem_headimagebutton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:scaleType="fitXY" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp" >
+
+            <TextView
+                android:id="@+id/helpdetail_visitor_tab2_listviewitem_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="伊丽莎白·李大娘"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/helpdetail_visitor_tab2_listviewitem_imbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"        
+                android:text="消息" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,24 +1,4 @@
 <resources>
-
-    <string-array name="actionbar_icons">
-        <item>@drawable/actionbar_helpdetail_tab1</item>
-        <item>@drawable/actionbar_helpdetail_tab2</item>
-    </string-array>
-    <string-array name="home_fragment_actionbar_icons">
-        <item>@drawable/actionbar_home_tab1</item>
-        <item>@drawable/actionbar_home_tab2</item>
-        <item>@drawable/actionbar_home_tab3</item>
-        <item>@drawable/actionbar_home_tab4</item>
-    </string-array>
-    <string-array name="home_fragment_actionbar_titles">
-        <item>@string/actionbar_home_tab1</item>
-        <item>@string/actionbar_home_tab2</item>
-        <item>@string/actionbar_home_tab3</item>
-        <item>@string/actionbar_home_tab4</item>
-    </string-array>
-    <string-array name="helpdetail_actionbar_titles">
-        <item>@string/actionbar_helpdetail_tab1</item>
-        <item>@string/actionbar_helpdetail_tab2</item>
-    </string-array>
-
+    <dimen name="dp">10dp</dimen>
+    <dimen name="normal_text_size">25sp</dimen>
 </resources>

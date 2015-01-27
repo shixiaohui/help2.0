@@ -8,6 +8,7 @@
     <color name="green">#259b24</color>
     <color name="orange">#ff9800</color>
     <color name="red">#e51c23</color>
+    <color name="transparent">#00000000</color>  
     
     <color name="gray">#808A87</color><!--灰色 -->
 	<color name="dark_gray">#585858</color><!--深灰色 -->
@@ -22,6 +23,11 @@
 	<color name="item_normal">#FFFFFF</color><!--item_normal背景色-->
 	<color name="item_press">#DDDDDD</color><!--item_press背景色-->
 	
+	<!-- toolbar（actionbar）颜色 -->
+    <color name="colorPrimary">#0f9d58</color>
+    <!-- 状态栏颜色 -->
+    <color name="colorPrimaryDark">#0b8043</color>
 	
     <color name="actionbar_selected">#F0F0F0</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
 </resources>

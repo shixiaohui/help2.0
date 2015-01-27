@@ -9,13 +9,11 @@ import jeese.helpme.people.People_Fragment;
 import jeese.helpme.service.LocationService;
 import jeese.helpme.service.MainService;
 import jeese.helpme.util.DummyTabContent;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,48 +21,42 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity  extends ActionBarActivity{
 
-	TabHost tabHost;
-	TabWidget tabWidget;
-	LinearLayout bottom_layout;
-	int CURRENT_TAB = 3;
+	private Toolbar mToolbar;
+	private TabHost tabHost;
+	private TabWidget tabWidget;
+	private int CURRENT_TAB = 3;
 	/**
 	 * 自定义初始界面 0->home 1->discover 2->help 3->people 4->me
 	 */
-	int CUSTOM_TAB = 2;
-	int firstenter = 0;
-	Home_Fragment homeFragment;
-	Discover_Fragment discoverFragment;
-	Help_Fragment helpFragment;
-	People_Fragment peopleFragment;
-	Me_Fragment meFragment;
-	android.support.v4.app.FragmentTransaction ft;
-	RelativeLayout tabIndicator1, tabIndicator2, tabIndicator3, tabIndicator4,
+	private int CUSTOM_TAB = 2;
+	private int firstenter = 0;
+	private Home_Fragment homeFragment;
+	private Discover_Fragment discoverFragment;
+	private Help_Fragment helpFragment;
+	private People_Fragment peopleFragment;
+	private Me_Fragment meFragment;
+	private android.support.v4.app.FragmentTransaction ft;
+	private RelativeLayout tabIndicator1, tabIndicator2, tabIndicator3, tabIndicator4,
 			tabIndicator5;
 
-	TextView tvTab1;
-	ImageView ivTab1;
-	TextView tvTab2;
-	ImageView ivTab2;
-	ImageView ivTab3;
-	TextView tvTab4;
-	ImageView ivTab4;
-	TextView tvTab5;
-	ImageView ivTab5;
-
-	ActionBar actionBar;
+	private TextView tvTab1;
+	private ImageView ivTab1;
+	private TextView tvTab2;
+	private ImageView ivTab2;
+	private ImageView ivTab3;
+	private TextView tvTab4;
+	private ImageView ivTab4;
+	private TextView tvTab5;
+	private ImageView ivTab5;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		// 图标标题是否显示，如果设成false则不显示
-
-		actionBar = getActionBar();
-		actionBar.setDisplayShowHomeEnabled(false);
-		actionBar.setDisplayShowTitleEnabled(false);
+		initViews();
 
 		// 开启后台服务
 		Intent intent = new Intent(this, MainService.class);
@@ -168,35 +160,21 @@ public class MainActivity extends FragmentActivity {
 		initTab();
 		tabHost.setCurrentTab(CUSTOM_TAB);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	
+	private void initViews() {
+		mToolbar = (Toolbar) findViewById(R.id.toolbar);
+		// toolbar.setLogo(R.drawable.ic_launcher);
+		mToolbar.setTitle("易助");// 标题的文字需在setSupportActionBar之前，不然会无效
+		// toolbar.setSubtitle("副标题");
+		setSupportActionBar(mToolbar);
 	}
 
 	// 判断当前
 	public void isTabHome() {
 
 		if (homeFragment == null) {
-			actionBar.show();
 			ft.add(R.id.realtabcontent, new Home_Fragment(), "home");
 		} else {
-			actionBar.show();
 			ft.show(homeFragment);
 		}
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext2));
@@ -208,10 +186,8 @@ public class MainActivity extends FragmentActivity {
 	public void isTabDiscover() {
 
 		if (discoverFragment == null) {
-			actionBar.hide();
 			ft.add(R.id.realtabcontent, new Discover_Fragment(), "discover");
 		} else {
-			actionBar.hide();
 			ft.show(discoverFragment);
 		}
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext1));
@@ -223,10 +199,8 @@ public class MainActivity extends FragmentActivity {
 	public void isTabHelp() {
 
 		if (helpFragment == null) {
-			actionBar.hide();
 			ft.add(R.id.realtabcontent, new Help_Fragment(), "help");
 		} else {
-			actionBar.hide();
 			ft.show(helpFragment);
 		}
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext1));
@@ -238,10 +212,8 @@ public class MainActivity extends FragmentActivity {
 	public void isTabPeople() {
 
 		if (peopleFragment == null) {
-			actionBar.show();
 			ft.add(R.id.realtabcontent, new People_Fragment(), "people");
 		} else {
-			actionBar.show();
 			ft.show(peopleFragment);
 		}
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext1));
@@ -253,10 +225,8 @@ public class MainActivity extends FragmentActivity {
 	public void isTabMe() {
 
 		if (meFragment == null) {
-			actionBar.hide();
 			ft.add(R.id.realtabcontent, new Me_Fragment(), "me");
 		} else {
-			actionBar.hide();
 			ft.show(meFragment);
 		}
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext1));
@@ -273,7 +243,7 @@ public class MainActivity extends FragmentActivity {
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabWidget = (TabWidget) findViewById(android.R.id.tabs);
 		LinearLayout layout = (LinearLayout) tabHost.getChildAt(0);
-		TabWidget tw = (TabWidget) layout.getChildAt(1);
+		TabWidget tw = (TabWidget) layout.getChildAt(2);
 
 		tabIndicator1 = (RelativeLayout) LayoutInflater.from(this).inflate(
 				R.layout.tab_indicator, tw, false);

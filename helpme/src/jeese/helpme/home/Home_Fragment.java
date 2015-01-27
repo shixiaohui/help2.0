@@ -1,6 +1,5 @@
 package jeese.helpme.home;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,62 +8,59 @@ import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnim
 
 import jeese.helpme.R;
 import jeese.helpme.location.MapActivity;
+import jeese.helpme.view.PagerSlidingTabStrip;
 import jeese.helpme.view.SwipeRefreshLayout;
 import jeese.helpme.view.SwipeRefreshLayout.OnLoadListener;
 import jeese.helpme.view.SwipeRefreshLayout.OnRefreshListener;
+import jeese.helpme.view.observablescrollview.ObservableListView;
+import jeese.helpme.view.observablescrollview.ObservableScrollViewCallbacks;
+import jeese.helpme.view.observablescrollview.ScrollState;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class Home_Fragment extends Fragment implements OnRefreshListener,
-		OnLoadListener {
+		OnLoadListener, ObservableScrollViewCallbacks{
 
+	private PagerSlidingTabStrip mPagerSlidingTabStrip;
 	private MyPagerAdapter mPagerAdapter;
 	private ViewPager mViewPager;
 	private List<View> list;
 	private View view1;
 	private View view2;
 	private View view3;
-	private View view4;
 
 	private View mView;
 
 	private int pageid = 0;// 当前page的id
 
-	private ListView mListView1;
+	private ObservableListView mListView1;
 	private Home_ListView_Adapter mHomeListViewAdapter1;
 	private SwipeRefreshLayout mSwipeLayout1;
-	private ListView mListView2;
+	private ObservableListView mListView2;
 	private Home_ListView_Adapter mHomeListViewAdapter2;
 	private SwipeRefreshLayout mSwipeLayout2;
-	private ListView mListView3;
+	private ObservableListView mListView3;
 	private Home_ListView_Adapter mHomeListViewAdapter3;
 	private SwipeRefreshLayout mSwipeLayout3;
-	private ListView mListView4;
-	private Home_ListView_Adapter mHomeListViewAdapter4;
-	private SwipeRefreshLayout mSwipeLayout4;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +70,6 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		setView1();
 		setView2();
 		setView3();
-		setView4();
 
 	}
 
@@ -88,10 +83,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		return mView;
 	}
 
-	@SuppressWarnings("deprecation")
 	private void init() {
-
-		final ActionBar actionBar = getActivity().getActionBar();
 
 		mViewPager = (ViewPager) mView.findViewById(R.id.home_fragment_pager);
 
@@ -101,98 +93,73 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 				null);
 		view3 = LayoutInflater.from(getActivity()).inflate(R.layout.home_tab3,
 				null);
-		view4 = LayoutInflater.from(getActivity()).inflate(R.layout.home_tab4,
-				null);
 
 		list = new ArrayList<View>();
 		list.add(view1);
 		list.add(view2);
 		list.add(view3);
-		list.add(view4);
 
 		mPagerAdapter = new MyPagerAdapter();
 		mViewPager.setAdapter(mPagerAdapter);
-		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+		
+		mPagerSlidingTabStrip = (PagerSlidingTabStrip) mView.findViewById(R.id.tabs);
+		mPagerSlidingTabStrip.setViewPager(mViewPager);
+		mPagerSlidingTabStrip.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
 			public void onPageSelected(int arg0) {
-				actionBar.setSelectedNavigationItem(arg0);
 				pageid = arg0;
+
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-
 			}
 		});
+		initTabsValue();
 
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		ActionBar.TabListener tabListener = new TabListener() {
-
-			@Override
-			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onTabSelected(Tab tab, FragmentTransaction ft) {
-				mViewPager.setCurrentItem(tab.getPosition());
-			}
-
-			@Override
-			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-
-			}
-		};
-
-		TypedArray iconIds = getResources().obtainTypedArray(
-				R.array.home_fragment_actionbar_icons);
-		TypedArray titleIds = getResources().obtainTypedArray(
-				R.array.home_fragment_actionbar_titles);
-		for (int i = 0; i < 4; i++) {
-			View view = getActivity().getLayoutInflater().inflate(
-					R.layout.home_fragment_actionbar_tab_layout, null);
-			ImageView imageView = (ImageView) view
-					.findViewById(R.id.home_fragment_icon);
-			imageView.setImageResource(iconIds.getResourceId(i, -1));
-			TextView textView = (TextView) view
-					.findViewById(R.id.home_fragment_title);
-			textView.setText(titleIds.getResourceId(i, -1));
-
-			actionBar.addTab(actionBar.newTab().setCustomView(view)
-					.setTabListener(tabListener));
-		}
-
-		enableEmbeddedTabs(actionBar);
 	}
+	
+	/**
+	 * mPagerSlidingTabStrip默认值配置
+	 * 
+	 */
+	private void initTabsValue() {
+		// 底部游标颜色
+		mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.colorPrimary));
+		// tab的分割线颜色
+		mPagerSlidingTabStrip.setDividerColor(Color.TRANSPARENT);
+		// tab背景
+		mPagerSlidingTabStrip.setBackgroundColor(Color.parseColor("#FFFFFF"));
+		// tab底线高度
+		mPagerSlidingTabStrip.setUnderlineHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+				0, getResources().getDisplayMetrics()));
+		// 游标高度
+		mPagerSlidingTabStrip.setIndicatorHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+				2, getResources().getDisplayMetrics()));
+		// 选中的文字颜色
+		mPagerSlidingTabStrip.setSelectedTextColor(Color.parseColor("#252525"));
+		// 正常文字颜色
+		mPagerSlidingTabStrip.setTextColor(Color.parseColor("#999999"));
+		//文字大小
+		mPagerSlidingTabStrip.setTextSize(42);
+		//自动填充屏幕
+		mPagerSlidingTabStrip.setShouldExpand(true);
 
-	private void enableEmbeddedTabs(Object actionBar) {
-		try {
-			Method setHasEmbeddedTabsMethod = actionBar.getClass()
-					.getDeclaredMethod("setHasEmbeddedTabs", boolean.class);
-			setHasEmbeddedTabsMethod.setAccessible(true);
-			setHasEmbeddedTabsMethod.invoke(actionBar, true);
-		} catch (Exception e) {
-			Log.v("EmbeddedTabs", e.getMessage().toString());
-
-		}
 	}
+	
 
 	class MyPagerAdapter extends PagerAdapter {
 
+		private final String[] TITLES = { "重要", "附近", "收藏"};
+		
 		@Override
 		public int getCount() {
-			return list.size();
+			return TITLES.length;
 		}
 
 		@Override
@@ -202,7 +169,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return "Tab" + (position);
+			return TITLES[position];
 		}
 
 		@Override
@@ -229,7 +196,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		mSwipeLayout1.setMode(SwipeRefreshLayout.Mode.BOTH);
 		mSwipeLayout1.setLoadNoFull(false);
 
-		mListView1 = (ListView) view1.findViewById(R.id.home_tab1_listview);
+		mListView1 = (ObservableListView) view1.findViewById(R.id.home_tab1_listview);
 
 		mHomeListViewAdapter1 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
@@ -238,7 +205,8 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 				mHomeListViewAdapter1);
 		animAdapter.setAbsListView(mListView1);
 		mListView1.setAdapter(animAdapter);
-
+		
+		mListView1.setScrollViewCallbacks(this);
 		mListView1.setOnItemClickListener(new ListItemClickListener());
 		mListView1.setOnItemLongClickListener(new ListItemLongClickListener());
 
@@ -257,7 +225,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		mSwipeLayout2.setMode(SwipeRefreshLayout.Mode.BOTH);
 		mSwipeLayout2.setLoadNoFull(false);
 
-		mListView2 = (ListView) view2.findViewById(R.id.home_tab2_listview);
+		mListView2 = (ObservableListView) view2.findViewById(R.id.home_tab2_listview);
 
 		mHomeListViewAdapter2 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
@@ -266,7 +234,8 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 				mHomeListViewAdapter2);
 		animAdapter.setAbsListView(mListView2);
 		mListView2.setAdapter(animAdapter);
-
+		
+		mListView2.setScrollViewCallbacks(this);
 		mListView2.setOnItemClickListener(new ListItemClickListener());
 		mListView2.setOnItemLongClickListener(new ListItemLongClickListener());
 
@@ -285,7 +254,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		mSwipeLayout3.setMode(SwipeRefreshLayout.Mode.BOTH);
 		mSwipeLayout3.setLoadNoFull(false);
 
-		mListView3 = (ListView) view3.findViewById(R.id.home_tab3_listview);
+		mListView3 = (ObservableListView) view3.findViewById(R.id.home_tab3_listview);
 
 		mHomeListViewAdapter3 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
@@ -295,38 +264,11 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		animAdapter.setAbsListView(mListView3);
 		mListView3.setAdapter(animAdapter);
 
+		mListView3.setScrollViewCallbacks(this);
 		mListView3.setOnItemClickListener(new ListItemClickListener());
 		mListView3.setOnItemLongClickListener(new ListItemLongClickListener());
 
 		mHomeListViewAdapter3.addAll(getItems());
-
-	}
-
-	@SuppressLint("ResourceAsColor")
-	private void setView4() {
-		mSwipeLayout4 = (SwipeRefreshLayout) view4
-				.findViewById(R.id.home_tab4_swipe_container);
-		mSwipeLayout4.setOnRefreshListener(this);
-		mSwipeLayout4.setOnLoadListener(this);
-		mSwipeLayout4.setColor(R.color.light_blue, R.color.red, R.color.green,
-				R.color.orange);
-		mSwipeLayout4.setMode(SwipeRefreshLayout.Mode.BOTH);
-		mSwipeLayout4.setLoadNoFull(false);
-
-		mListView4 = (ListView) view4.findViewById(R.id.home_tab4_listview);
-
-		mHomeListViewAdapter4 = new Home_ListView_Adapter(getActivity(), null,
-				new ListItemButtonClickListener());
-
-		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-				mHomeListViewAdapter4);
-		animAdapter.setAbsListView(mListView4);
-		mListView4.setAdapter(animAdapter);
-
-		mListView4.setOnItemClickListener(new ListItemClickListener());
-		mListView4.setOnItemLongClickListener(new ListItemLongClickListener());
-
-		mHomeListViewAdapter4.addAll(getItems());
 
 	}
 
@@ -363,11 +305,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 					mHomeListViewAdapter3.addAll(0, getnewItems());
 					mSwipeLayout3.setRefreshing(false);
 					mHomeListViewAdapter3.notifyDataSetChanged();
-				} else if (pageid == 3) {
-					mHomeListViewAdapter4.addAll(0, getnewItems());
-					mSwipeLayout4.setRefreshing(false);
-					mHomeListViewAdapter4.notifyDataSetChanged();
-				}
+				} 
 
 			}
 		}, 2000);
@@ -391,10 +329,6 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 					mHomeListViewAdapter3.addAll(getnewItems());
 					mSwipeLayout3.setLoading(false);
 					mHomeListViewAdapter3.notifyDataSetChanged();
-				} else if (pageid == 3) {
-					mHomeListViewAdapter4.addAll(getnewItems());
-					mSwipeLayout4.setLoading(false);
-					mHomeListViewAdapter4.notifyDataSetChanged();
 				}
 
 			}
@@ -483,32 +417,6 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 						startActivity(Intent);
 					}
 				}
-			} else if (pageid == 3) {
-				for (int i = mListView4.getFirstVisiblePosition(); i <= mListView4
-						.getLastVisiblePosition(); i++) {
-					if (v == mListView4
-							.getChildAt(
-									i - mListView4.getFirstVisiblePosition())
-							.findViewById(
-									R.id.home_fragment_listview_item_markbutton)) {
-						Toast.makeText(
-								getActivity(),
-								"Clicked on Mark Action Button of List Item "
-										+ i, Toast.LENGTH_SHORT).show();
-					} else if (v == mListView4
-							.getChildAt(
-									i - mListView4.getFirstVisiblePosition())
-							.findViewById(
-									R.id.home_fragment_listview_item_helpbutton)) {
-						Toast.makeText(
-								getActivity(),
-								"Clicked on Help Action Button of List Item "
-										+ i, Toast.LENGTH_SHORT).show();
-						Intent Intent = new Intent(getActivity(),
-								MapActivity.class);
-						startActivity(Intent);
-					}
-				}
 			}
 
 		}
@@ -535,6 +443,35 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 			return true;
 		}
 
+	}
+
+	@Override
+	public void onScrollChanged(int scrollY, boolean firstScroll,
+			boolean dragging) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDownMotionEvent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+        ActionBar actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+        if (scrollState == ScrollState.UP) {
+            if (actionBar.isShowing()) {
+                actionBar.hide();
+            }
+        } else if (scrollState == ScrollState.DOWN) {
+            if (!actionBar.isShowing()) {
+                actionBar.show();
+            }
+        }
+
+		
 	}
 
 }
