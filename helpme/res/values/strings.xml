@@ -7,10 +7,9 @@
     <string name="buttom_help">求助</string>
     <string name="buttom_people">人脉</string>
     <string name="buttom_me">我</string>
-    <string name="actionbar_home_tab1">重要</string>
-    <string name="actionbar_home_tab2">求助</string>
-    <string name="actionbar_home_tab3">提问</string>
-    <string name="actionbar_home_tab4">收藏</string>
+    <string name="actionbar_home_tab1">推送</string>
+    <string name="actionbar_home_tab2">附近</string>
+    <string name="actionbar_home_tab3">收藏</string>
     <string name="actionbar_helpdetail_tab1">详情</string>
     <string name="actionbar_helpdetail_tab2">进度</string>
     

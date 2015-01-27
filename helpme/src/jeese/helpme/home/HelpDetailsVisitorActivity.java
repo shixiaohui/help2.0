@@ -2,27 +2,31 @@ package jeese.helpme.home;
 
 import io.rong.imkit.RongIM;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
 import net.tsz.afinal.FinalBitmap;
 
 import jeese.helpme.R;
 import jeese.helpme.view.CircleImageView;
-import android.app.ActionBar;
-import android.app.ActionBar.TabListener;
-import android.app.Activity;
-import android.app.FragmentTransaction;
-import android.app.ActionBar.Tab;
+import jeese.helpme.view.PagerSlidingTabStrip;
+import jeese.helpme.view.SildingFinishLayout;
+import jeese.helpme.view.SildingFinishLayout.OnSildingFinishListener;
+import jeese.helpme.view.observablescrollview.ObservableListView;
+import jeese.helpme.view.observablescrollview.ObservableScrollViewCallbacks;
+import jeese.helpme.view.observablescrollview.ScrollState;
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,30 +36,39 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-public class HelpDetailsVisitorActivity extends Activity {
+public class HelpDetailsVisitorActivity extends ActionBarActivity implements
+		ObservableScrollViewCallbacks {
 
+	private Toolbar mToolbar;
+	private PagerSlidingTabStrip mPagerSlidingTabStrip;
+	private SildingFinishLayout mSildingFinishLayout;
+	// viewpager相关
 	private MyPagerAdapter mPagerAdapter;
 	private ViewPager mViewPager;
 	private List<View> list;
 	private View view1;
 	private View view2;
 
+	// tab1相关
 	private View headerview1;
-	private ListView mListView;
-	private HelpDetailsVisitor_Listview_Adapter mhelpdetailsTab1ListViewAdapter;
+	private ObservableListView mListView1;
+	private HelpDetailsVisitor_Listview_Adapter_1 mhelpdetailsTab1ListViewAdapter1;
 
+	// tab2相关
+	private View headerview2;
+	private ObservableListView mListView2;
+	private HelpDetailsVisitor_Listview_Adapter_2 mhelpdetailsTab1ListViewAdapter2;
+
+	// tab1_headerview相关
 	private FinalBitmap fb;
 	private CircleImageView headimage;
 	private ImageButton headimagebutton;
-
 	private Button bt1;
 	private Button bt2;
+
 	// 用来实现 UI 线程的更新。
 	private Handler mHandler;
 
@@ -75,11 +88,7 @@ public class HelpDetailsVisitorActivity extends Activity {
 	}
 
 	private void init() {
-
-		// 图标标题是否显示，如果设成false则不显示
-		final ActionBar actionBar = getActionBar();
-		actionBar.setDisplayShowHomeEnabled(false);
-		actionBar.setDisplayShowTitleEnabled(false);
+		setToolBar();
 
 		mViewPager = (ViewPager) this
 				.findViewById(R.id.helpsetails_visitor_pager);
@@ -95,67 +104,99 @@ public class HelpDetailsVisitorActivity extends Activity {
 
 		mPagerAdapter = new MyPagerAdapter();
 		mViewPager.setAdapter(mPagerAdapter);
-		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+		mPagerSlidingTabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+		mPagerSlidingTabStrip.setViewPager(mViewPager);
+		mPagerSlidingTabStrip
+				.setOnPageChangeListener(new OnPageChangeListener() {
 
+					@Override
+					public void onPageSelected(int arg0) {
+
+					}
+
+					@Override
+					public void onPageScrolled(int arg0, float arg1, int arg2) {
+					}
+
+					@Override
+					public void onPageScrollStateChanged(int arg0) {
+					}
+				});
+		initTabsValue();
+
+	}
+
+	/**
+	 * mPagerSlidingTabStrip默认值配置
+	 * 
+	 */
+	private void initTabsValue() {
+		// 底部游标颜色
+		mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(
+				R.color.colorPrimary));
+		// tab的分割线颜色
+		mPagerSlidingTabStrip.setDividerColor(Color.TRANSPARENT);
+		// tab背景
+		mPagerSlidingTabStrip.setBackgroundColor(Color.parseColor("#FFFFFF"));
+		// tab底线高度
+		mPagerSlidingTabStrip.setUnderlineHeight((int) TypedValue
+				.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources()
+						.getDisplayMetrics()));
+		// 游标高度
+		mPagerSlidingTabStrip.setIndicatorHeight((int) TypedValue
+				.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources()
+						.getDisplayMetrics()));
+		// 选中的文字颜色
+		mPagerSlidingTabStrip.setSelectedTextColor(Color.parseColor("#252525"));
+		// 正常文字颜色
+		mPagerSlidingTabStrip.setTextColor(Color.parseColor("#999999"));
+		// 文字大小
+		mPagerSlidingTabStrip.setTextSize(42);
+		// 自动填充屏幕
+		mPagerSlidingTabStrip.setShouldExpand(true);
+
+	}
+
+	private void setToolBar() {
+		mToolbar = (Toolbar) findViewById(R.id.toolbar);
+		// toolbar.setLogo(R.drawable.ic_launcher);
+		mToolbar.setTitle(null);// 标题的文字需在setSupportActionBar之前，不然会无效
+		// toolbar.setSubtitle("副标题");
+		setSupportActionBar(mToolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		/* 菜单的监听可以在toolbar里设置，也可以像ActionBar那样，通过下面的两个回调方法来处理 */
+		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 			@Override
-			public void onPageSelected(int arg0) {
-				actionBar.setSelectedNavigationItem(arg0);
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-
+			public boolean onMenuItemClick(MenuItem item) {
+				switch (item.getItemId()) {
+				case android.R.id.home:
+					finish();
+					return true;
+				default:
+					break;
+				}
+				return true;
 			}
 		});
 
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	}
 
-		ActionBar.TabListener tabListener = new TabListener() {
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 
-			@Override
-			public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onTabSelected(Tab tab, FragmentTransaction ft) {
-				mViewPager.setCurrentItem(tab.getPosition());
-			}
-
-			@Override
-			public void onTabReselected(Tab tab, FragmentTransaction ft) {
-				// TODO Auto-generated method stub
-
-			}
-		};
-
-		TypedArray iconIds = getResources().obtainTypedArray(
-				R.array.actionbar_icons);
-		TypedArray titleIds = getResources().obtainTypedArray(
-				R.array.helpdetail_actionbar_titles);
-		for (int i = 0; i < 2; i++) {
-			View view = getLayoutInflater().inflate(
-					R.layout.helpdetail_icon_actionbar_tab_layout, null);
-			ImageView imageView = (ImageView) view
-					.findViewById(R.id.helpdetail_icon);
-			imageView.setImageResource(iconIds.getResourceId(i, -1));
-			TextView textView = (TextView) view
-					.findViewById(R.id.helpdetail_title);
-			textView.setText(titleIds.getResourceId(i, -1));
-
-			actionBar.addTab(actionBar.newTab().setCustomView(view)
-					.setTabListener(tabListener));
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-
-		enableEmbeddedTabs(actionBar);
 	}
 
 	private void setView1() {
@@ -172,20 +213,8 @@ public class HelpDetailsVisitorActivity extends Activity {
 				"http://p.qq181.com/cms/1210/2012100413195471481.jpg");
 		headimagebutton.setImageResource(R.drawable.headbutton_1);
 
-		mListView = (ListView) view1
-				.findViewById(R.id.helpdetail_visitor_tab1_listview);
-		mListView.addHeaderView(headerview1, null, false);
-		mhelpdetailsTab1ListViewAdapter = new HelpDetailsVisitor_Listview_Adapter(
-				this, null, new ListItemButtonClickListener());
-		mListView.setOnItemClickListener(new ListItemClickListener());
-		mListView.setOnItemLongClickListener(new ListItemLongClickListener());
-		mListView.setAdapter(mhelpdetailsTab1ListViewAdapter);
-		mhelpdetailsTab1ListViewAdapter.addAll(getItems());
-		// setListViewHeightBasedOnChildren(mListView);
-	}
-
-	private void setView2() {
-		bt1 = (Button) view2.findViewById(R.id.button1);
+		bt1 = (Button) headerview1
+				.findViewById(R.id.helpdetail_visitor_tab1_imbutton);
 		bt1.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -204,7 +233,8 @@ public class HelpDetailsVisitorActivity extends Activity {
 			}
 		});
 
-		bt2 = (Button) view2.findViewById(R.id.button2);
+		bt2 = (Button) headerview1
+				.findViewById(R.id.helpdetail_visitor_tab1_phonebutton);
 		bt2.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -216,45 +246,57 @@ public class HelpDetailsVisitorActivity extends Activity {
 
 			}
 		});
+
+		mListView1 = (ObservableListView) view1
+				.findViewById(R.id.helpdetail_visitor_tab1_listview);
+		mListView1.addHeaderView(headerview1, null, false);
+		mhelpdetailsTab1ListViewAdapter1 = new HelpDetailsVisitor_Listview_Adapter_1(
+				this, null, new ListItemButtonClickListener());
+		mListView1.setOnItemClickListener(new ListItemClickListener());
+		mListView1.setOnItemLongClickListener(new ListItemLongClickListener());
+		mListView1.setAdapter(mhelpdetailsTab1ListViewAdapter1);
+		mListView1.setScrollViewCallbacks(this);
+		mhelpdetailsTab1ListViewAdapter1.addAll(getItems());
+
+		mSildingFinishLayout = (SildingFinishLayout) findViewById(R.id.sildingFinishLayout);
+		mSildingFinishLayout
+				.setOnSildingFinishListener(new OnSildingFinishListener() {
+
+					@Override
+					public void onSildingFinish() {
+						finish();
+					}
+				});
+
+		// touchView要设置到ListView上面
+		mSildingFinishLayout.setTouchView(mListView1);
+
 	}
 
-	private void enableEmbeddedTabs(Object actionBar) {
-		try {
-			Method setHasEmbeddedTabsMethod = actionBar.getClass()
-					.getDeclaredMethod("setHasEmbeddedTabs", boolean.class);
-			setHasEmbeddedTabsMethod.setAccessible(true);
-			setHasEmbeddedTabsMethod.invoke(actionBar, true);
-		} catch (Exception e) {
-			Log.v("EmbeddedTabs", e.getMessage().toString());
+	private void setView2() {
+		headerview2 = LayoutInflater.from(HelpDetailsVisitorActivity.this)
+				.inflate(R.layout.helpdetail_visitor_tab2_listview_headerview,
+						null);
 
-		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		mListView2 = (ObservableListView) view2
+				.findViewById(R.id.helpdetail_visitor_tab2_listview);
+		mListView2.addHeaderView(headerview2, null, false);
+		mhelpdetailsTab1ListViewAdapter2 = new HelpDetailsVisitor_Listview_Adapter_2(
+				this, null, new ListItemButtonClickListener());
+		mListView2.setOnItemClickListener(new ListItemClickListener());
+		mListView2.setOnItemLongClickListener(new ListItemLongClickListener());
+		mListView2.setAdapter(mhelpdetailsTab1ListViewAdapter2);
+		mListView2.setScrollViewCallbacks(this);
+		mhelpdetailsTab1ListViewAdapter2.addAll(getItems_1());
 	}
 
 	class MyPagerAdapter extends PagerAdapter {
 
+		private final String[] TITLES = { "详情", "进度" };
+
 		@Override
 		public int getCount() {
-			return list.size();
+			return TITLES.length;
 		}
 
 		@Override
@@ -264,7 +306,7 @@ public class HelpDetailsVisitorActivity extends Activity {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return "Tab" + (position);
+			return TITLES[position];
 		}
 
 		@Override
@@ -282,7 +324,15 @@ public class HelpDetailsVisitorActivity extends Activity {
 
 	public ArrayList<Integer> getItems() {
 		ArrayList<Integer> items = new ArrayList<Integer>();
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 20; i++) {
+			items.add(i);
+		}
+		return items;
+	}
+
+	public ArrayList<Integer> getItems_1() {
+		ArrayList<Integer> items = new ArrayList<Integer>();
+		for (int i = 0; i < 10; i++) {
 			items.add(i);
 		}
 		return items;
@@ -310,6 +360,34 @@ public class HelpDetailsVisitorActivity extends Activity {
 				int position, long id) {
 
 			return true;
+		}
+
+	}
+
+	@Override
+	public void onScrollChanged(int scrollY, boolean firstScroll,
+			boolean dragging) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onDownMotionEvent() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+		ActionBar actionBar = getSupportActionBar();
+		if (scrollState == ScrollState.UP) {
+			if (actionBar.isShowing()) {
+				actionBar.hide();
+			}
+		} else if (scrollState == ScrollState.DOWN) {
+			if (!actionBar.isShowing()) {
+				actionBar.show();
+			}
 		}
 
 	}

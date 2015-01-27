@@ -1,5 +1,6 @@
 package jeese.helpme.application;
 
+import cn.jpush.android.api.JPushInterface;
 import jeese.helpme.R;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
@@ -11,6 +12,10 @@ public class App extends Application {
 	public void onCreate() {
 		super.onCreate();
 
+		//JPush的初始化
+		JPushInterface.setDebugMode(true);
+	    JPushInterface.init(this);
+		
 		// 初始化。
 		RongIM.init(this, "k51hidwq1fspb", R.drawable.ic_launcher);
 
