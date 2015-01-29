@@ -19,9 +19,11 @@
 	<color name="tabhost1">#D6D6D6</color><!--低栏分割栏颜色-->
 	<color name="tabtext1">#999999</color><!--暗色底栏字体-->
 	<color name="tabtext2">#0f9d58</color><!--亮色底栏字体-->
-	<color name="bg">#F0F0F0</color><!--背景色-->
+	<color name="bg">#EBEBEB</color><!--背景色-->
 	<color name="item_normal">#FFFFFF</color><!--item_normal背景色-->
-	<color name="item_press">#DDDDDD</color><!--item_press背景色-->
+	<color name="item_press">#DEDEDE</color><!--item_press背景色-->
+	<color name="item_edge_1">#CCCCCC</color><!--item_press背景色-->
+	<color name="item_edge_2">#CDCDCD</color><!--item_press背景色-->
 	
 	<!-- toolbar（actionbar）颜色 -->
     <color name="colorPrimary">#0f9d58</color>

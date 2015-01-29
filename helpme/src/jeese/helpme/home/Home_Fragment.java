@@ -33,7 +33,6 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -424,9 +423,16 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Intent Intent = new Intent(getActivity(),
-					HelpDetailsVisitorActivity.class);
-			startActivity(Intent);
+			if(pageid == 1){
+				Intent Intent = new Intent(getActivity(),
+						AskDeatilsVisitorActivity.class);
+				startActivity(Intent);
+			}else{
+				Intent Intent = new Intent(getActivity(),
+						HelpDetailsVisitorActivity.class);
+				startActivity(Intent);
+			}
+
 		}
 	}
 

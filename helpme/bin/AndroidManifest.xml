@@ -81,6 +81,10 @@
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
+            android:name=".home.AskDeatilsVisitorActivity"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
             android:name=".help.SendLifeHelpActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@android:style/Theme.NoTitleBar" >
