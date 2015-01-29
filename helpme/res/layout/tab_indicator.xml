@@ -5,18 +5,16 @@
     android:layout_marginLeft="-3dp"
     android:layout_marginRight="-3dp"
     android:layout_weight="1"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
     android:orientation="vertical" >
-    <View
-        android:id="@+id/tabhost_seperator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/tabhost1" />
+
     <ImageView
         android:id="@+id/icon"
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:contentDescription="@null"
-        android:scaleType="centerInside"
+        android:scaleType="center"
         android:layout_marginTop="6dp"
         android:layout_centerHorizontal="true" />
 

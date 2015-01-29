@@ -150,8 +150,6 @@ public class HelpDetailsVisitorActivity extends ActionBarActivity implements
 		mPagerSlidingTabStrip.setSelectedTextColor(Color.parseColor("#252525"));
 		// 正常文字颜色
 		mPagerSlidingTabStrip.setTextColor(Color.parseColor("#999999"));
-		// 文字大小
-		mPagerSlidingTabStrip.setTextSize(42);
 		// 自动填充屏幕
 		mPagerSlidingTabStrip.setShouldExpand(true);
 

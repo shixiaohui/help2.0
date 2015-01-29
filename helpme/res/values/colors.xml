@@ -15,10 +15,10 @@
 	<color name="chenghuang">#FF9912</color><!--澄黄色-->
 	<color name="huise">#DADADA</color><!--灰色 -->
 	<color name="bar">#999999</color><!--状态栏颜色-->
-	<color name="tabhost">#F0F0F0</color><!--低栏背景色-->
-	<color name="tabhost1">#999999</color><!--低栏分割栏颜色-->
-	<color name="tabtext1">#6D6D6D</color><!--灰色底栏字体-->
-	<color name="tabtext2">#525252</color><!--橙色底栏字体-->
+	<color name="tabhost">#FCFCFC</color><!--低栏背景色-->
+	<color name="tabhost1">#D6D6D6</color><!--低栏分割栏颜色-->
+	<color name="tabtext1">#999999</color><!--暗色底栏字体-->
+	<color name="tabtext2">#0f9d58</color><!--亮色底栏字体-->
 	<color name="bg">#F0F0F0</color><!--背景色-->
 	<color name="item_normal">#FFFFFF</color><!--item_normal背景色-->
 	<color name="item_press">#DDDDDD</color><!--item_press背景色-->

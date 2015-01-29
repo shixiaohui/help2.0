@@ -7,20 +7,13 @@
     android:layout_weight="1"
     android:orientation="vertical" >
 
-    <View
-        android:id="@+id/tabhost_seperator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/tabhost1" />
-
     <ImageView
         android:id="@+id/icon_help"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:contentDescription="@null"
-        android:scaleType="fitCenter"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        />
+        android:contentDescription="@null"
+        android:scaleType="fitCenter" />
 
 </RelativeLayout>
