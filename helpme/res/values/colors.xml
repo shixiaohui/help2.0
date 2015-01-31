@@ -15,15 +15,28 @@
 	<color name="chenghuang">#FF9912</color><!--澄黄色-->
 	<color name="huise">#DADADA</color><!--灰色 -->
 	<color name="bar">#999999</color><!--状态栏颜色-->
+	
 	<color name="tabhost">#FCFCFC</color><!--低栏背景色-->
 	<color name="tabhost1">#D6D6D6</color><!--低栏分割栏颜色-->
 	<color name="tabtext1">#999999</color><!--暗色底栏字体-->
 	<color name="tabtext2">#0f9d58</color><!--亮色底栏字体-->
-	<color name="bg">#EBEBEB</color><!--背景色-->
+	
+	<color name="bg">#DDDDDD</color><!--背景色-->
+	
 	<color name="item_normal">#FFFFFF</color><!--item_normal背景色-->
 	<color name="item_press">#DEDEDE</color><!--item_press背景色-->
-	<color name="item_edge_1">#CCCCCC</color><!--item_press背景色-->
-	<color name="item_edge_2">#CDCDCD</color><!--item_press背景色-->
+	<color name="item_bottom">#F3F3F3</color><!--item_press背景色-->
+	<color name="item_edge_1">#CCCCCC</color><!--上左右边框色-->
+	<color name="item_edge_2">#CDCDCD</color><!--下边框色-->
+	<color name="item_edge_3">#D8D8D8</color><!--下方按钮和内容分割栏颜色-->
+	<color name="item_edge_4">#D7D7D7</color><!--下方按钮之间分割栏颜色-->
+	
+	<color name="text_location">#999999</color><!--位置字体颜色-->
+	<color name="text_tag">#888888</color><!--标签字体颜色-->
+	<color name="text_title">#000000</color><!--标题字体颜色-->
+	<color name="text_content">#333333</color><!--内容字体颜色-->
+	<color name="text_name">#6F6F6F</color><!--昵称字体颜色-->
+	<color name="text_time">#ACACAC</color><!--时间字体颜色-->
 	
 	<!-- toolbar（actionbar）颜色 -->
     <color name="colorPrimary">#0f9d58</color>

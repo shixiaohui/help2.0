@@ -187,7 +187,7 @@ public class SildingFinishLayout extends RelativeLayout implements
 			break;
 		case MotionEvent.ACTION_UP:
 			isSilding = false;
-			if (mParentView.getScrollX() <= -viewWidth / 2) {
+			if (mParentView.getScrollX() <= -viewWidth / 4) {
 				isFinish = true;
 				scrollRight();
 			} else {
