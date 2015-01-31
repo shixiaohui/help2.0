@@ -1,9 +1,9 @@
 package jeese.helpme.application;
 
-import cn.jpush.android.api.JPushInterface;
 import jeese.helpme.R;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import cn.jpush.android.api.JPushInterface;
 import android.app.Application;
 import android.util.Log;
 
@@ -17,8 +17,10 @@ public class App extends Application {
 	    JPushInterface.init(this);
 		
 		// 初始化。
-		RongIM.init(this, "k51hidwq1fspb", R.drawable.ic_launcher);
-
+		RongIM.init(this);
+		
+		//RongIM.init(this, "e7x8xycsx6flq", R.drawable.ic_launcher);
+		
 		// 从您的应用服务器请求，以获取 Token。在本示例中我们直接在下面 hardcode 给 token 赋值。
 		// String token = getTokenFromAppServer();
 

@@ -152,7 +152,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 
 	class MyPagerAdapter extends PagerAdapter {
 
-		private final String[] TITLES = { "重要", "附近", "收藏"};
+		private final String[] TITLES = { "重要", "附近", "历史"};
 		
 		@Override
 		public int getCount() {
