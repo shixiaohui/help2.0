@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/list_item_bg"
+        android:background="@color/white"
         android:orientation="vertical" >
 
         <View
@@ -33,10 +33,11 @@
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:paddingTop="10dp" >
+                >
 
                 <RelativeLayout
                     android:layout_width="45dp"
+                    android:layout_marginTop="10dp"
                     android:layout_height="45dp" >
 
                     <jeese.helpme.view.CircleImageView
@@ -60,13 +61,14 @@
                     android:layout_height="65dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
+                    android:paddingTop="10dp" 
                     android:paddingLeft="8dp" >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
                         android:orientation="horizontal" >
 
                         <TextView
@@ -81,7 +83,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="3"
+                        android:layout_weight="1"
                         android:orientation="horizontal" >
 
                         <TextView
@@ -92,6 +94,19 @@
                             android:textColor="@color/text_time"
                             android:textSize="12sp" />
                     </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="65dp"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="发消息" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -113,7 +128,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp" >
@@ -136,67 +152,6 @@
                     android:text="广州大学城中山大学"
                     android:textColor="@color/text_location"
                     android:textSize="14sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/item_edge_3" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/item_bottom"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
-
-                    <ImageButton
-                        android:id="@+id/askdetail_visitor_card_2_markbutton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:contentDescription="@null"
-                        android:src="@drawable/mark" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="4dp"
-                        android:alpha="0.54"
-                        android:text="3"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
-
-                    <ImageButton
-                        android:id="@+id/askdetail_visitor_card_2_helpbutton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:contentDescription="@null"
-                        android:src="@drawable/heart" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="4dp"
-                        android:alpha="0.54"
-                        android:text="15"
-                        android:textSize="12sp" />
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

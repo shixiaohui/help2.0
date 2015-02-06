@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg"
         android:orientation="vertical" >
 
         <include layout="@layout/toolbar" />
@@ -16,8 +15,8 @@
         <ListView
             android:id="@+id/askdetail_visitor_listview"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/bg"
             android:cacheColorHint="#00000000"
             android:clipToPadding="false"
             android:divider="@null"
@@ -26,6 +25,19 @@
             android:overScrollMode="never"
             android:padding="10dp"
             android:scrollbarStyle="outsideOverlay" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/tag_1" >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:text="回答"
+                android:textColor="@color/black" />
+        </LinearLayout>
     </LinearLayout>
 
 </jeese.helpme.view.SildingFinishLayout>

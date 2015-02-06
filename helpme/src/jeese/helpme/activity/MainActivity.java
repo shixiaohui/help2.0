@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -52,6 +53,11 @@ public class MainActivity  extends ActionBarActivity{
 	private ImageView ivTab4;
 	private TextView tvTab5;
 	private ImageView ivTab5;
+	
+	private View v1;
+	private View v2;
+	private View v3;
+	private View v4;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -253,6 +259,7 @@ public class MainActivity  extends ActionBarActivity{
 				R.layout.tab_indicator, tabWidget, false);
 		tvTab1 = (TextView) tabIndicator1.getChildAt(1);
 		ivTab1 = (ImageView) tabIndicator1.getChildAt(0);
+		v1 = (View) tabIndicator1.getChildAt(2);
 		ivTab1.setBackgroundResource(R.drawable.selector_mood_home);
 		tvTab1.setText(R.string.buttom_home);
 
@@ -260,6 +267,7 @@ public class MainActivity  extends ActionBarActivity{
 				R.layout.tab_indicator, tabWidget, false);
 		tvTab2 = (TextView) tabIndicator2.getChildAt(1);
 		ivTab2 = (ImageView) tabIndicator2.getChildAt(0);
+		v2 = (View) tabIndicator2.getChildAt(2);
 		ivTab2.setBackgroundResource(R.drawable.selector_mood_discover);
 		tvTab2.setText(R.string.buttom_discover);
 
@@ -272,6 +280,7 @@ public class MainActivity  extends ActionBarActivity{
 				R.layout.tab_indicator, tabWidget, false);
 		tvTab4 = (TextView) tabIndicator4.getChildAt(1);
 		ivTab4 = (ImageView) tabIndicator4.getChildAt(0);
+		v3 = (View) tabIndicator4.getChildAt(2);
 		ivTab4.setBackgroundResource(R.drawable.selector_mood_people);
 		tvTab4.setText(R.string.buttom_people);
 
@@ -279,6 +288,7 @@ public class MainActivity  extends ActionBarActivity{
 				R.layout.tab_indicator, tabWidget, false);
 		tvTab5 = (TextView) tabIndicator5.getChildAt(1);
 		ivTab5 = (ImageView) tabIndicator5.getChildAt(0);
+		v4 = (View) tabIndicator5.getChildAt(2);
 		ivTab5.setBackgroundResource(R.drawable.selector_mood_me);
 		tvTab5.setText(R.string.buttom_me);
 	}
@@ -317,25 +327,25 @@ public class MainActivity  extends ActionBarActivity{
 	}
 	
 	private void setBadgeView(){
-		BadgeView bv = new BadgeView(this, tabWidget,0);
+		BadgeView bv = new BadgeView(this, v1);
 		bv.setText("3");
 		bv.setTextColor(Color.WHITE);
 		bv.setTextSize(12);
-		bv.setBadgePosition(BadgeView.POSITION_TOP_RIGHT); //默认值
+		bv.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		bv.show();
 		
-		BadgeView bv1 = new BadgeView(this, tabWidget,3);
+		BadgeView bv1 = new BadgeView(this, v3);
 		bv1.setText("1");
 		bv1.setTextColor(Color.WHITE);
 		bv1.setTextSize(12);
-		bv1.setBadgePosition(BadgeView.POSITION_TOP_RIGHT); //默认值
+		bv1.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		bv1.show();
 		
-		BadgeView bv2 = new BadgeView(this, tabWidget,4);
+		BadgeView bv2 = new BadgeView(this, v4);
 		bv2.setText("1");
 		bv2.setTextColor(Color.WHITE);
 		bv2.setTextSize(12);
-		bv2.setBadgePosition(BadgeView.POSITION_TOP_RIGHT); //默认值
+		bv2.setBadgePosition(BadgeView.POSITION_TOP_RIGHT); 
 		bv2.show();
 	}
 
