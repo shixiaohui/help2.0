@@ -2,6 +2,9 @@ package jeese.helpme.home;
 
 import java.util.ArrayList;
 
+import com.haarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
+
 import jeese.helpme.R;
 import jeese.helpme.view.SildingFinishLayout;
 import jeese.helpme.view.SildingFinishLayout.OnSildingFinishListener;
@@ -42,7 +45,12 @@ public class AskDeatilsVisitorActivity extends ActionBarActivity {
 				this, null, new ListItemButtonClickListener());
 		mListView1.setOnItemClickListener(new ListItemClickListener());
 		mListView1.setOnItemLongClickListener(new ListItemLongClickListener());
-		mListView1.setAdapter(maskdetailsListViewAdapter);
+		
+		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+				maskdetailsListViewAdapter);
+		animAdapter.setAbsListView(mListView1);
+		mListView1.setAdapter(animAdapter);
+		
 		maskdetailsListViewAdapter.addAll(getItems());
 
 		mSildingFinishLayout = (SildingFinishLayout) findViewById(R.id.sildingFinishLayout);

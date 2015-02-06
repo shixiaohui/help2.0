@@ -2,26 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
     android:orientation="vertical" >
 
-    <jeese.helpme.view.SwipeRefreshLayout
-        android:id="@+id/home_tab3_swipe_container"
+    <jeese.helpme.view.observablescrollview.ObservableListView
+        android:id="@+id/home_tab3_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <jeese.helpme.view.observablescrollview.ObservableListView
-            android:id="@+id/home_tab3_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:cacheColorHint="#00000000"
-            android:clipToPadding="false"
-            android:divider="@null"
-            android:dividerHeight="8dp"
-            android:fadingEdge="none"
-            android:overScrollMode="never"
-            android:padding="8dp"
-            android:scrollbarStyle="outsideOverlay" />
-    </jeese.helpme.view.SwipeRefreshLayout>
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        android:cacheColorHint="#00000000"
+        android:clipToPadding="false"
+        android:divider="@null"
+        android:dividerHeight="8dp"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:padding="8dp"
+        android:scrollbarStyle="outsideOverlay" />
 
 </LinearLayout>
