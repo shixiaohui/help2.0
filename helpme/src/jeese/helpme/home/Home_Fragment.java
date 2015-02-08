@@ -9,11 +9,10 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.haarman.listviewanimations.swinginadapters.AnimationAdapter;
-import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
-
 import jeese.helpme.R;
+import jeese.helpme.adapter.Home_ListView_Adapter;
 import jeese.helpme.location.MapActivity;
+import jeese.helpme.util.Dp2Px;
 import jeese.helpme.view.PagerSlidingTabStrip;
 import jeese.helpme.view.observablescrollview.ObservableListView;
 import jeese.helpme.view.observablescrollview.ObservableScrollViewCallbacks;
@@ -201,10 +200,10 @@ public class Home_Fragment extends Fragment implements
 		mHomeListViewAdapter1 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
 
-		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-				mHomeListViewAdapter1);
-		animAdapter.setAbsListView(mListView1);
-		mListView1.setAdapter(animAdapter);
+//		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+//				mHomeListViewAdapter1);
+//		animAdapter.setAbsListView(mListView1);
+		mListView1.setAdapter(mHomeListViewAdapter1);
 
 		mListView1.setScrollViewCallbacks(this);
 		mListView1.setOnItemClickListener(new ListItemClickListener());
@@ -225,10 +224,10 @@ public class Home_Fragment extends Fragment implements
 		mHomeListViewAdapter2 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
 
-		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-				mHomeListViewAdapter2);
-		animAdapter.setAbsListView(mListView2);
-		mListView2.setAdapter(animAdapter);
+//		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+//				mHomeListViewAdapter2);
+//		animAdapter.setAbsListView(mListView2);
+		mListView2.setAdapter(mHomeListViewAdapter2);
 
 		mListView2.setScrollViewCallbacks(this);
 		mListView2.setOnItemClickListener(new ListItemClickListener());
@@ -246,10 +245,10 @@ public class Home_Fragment extends Fragment implements
 		mHomeListViewAdapter3 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
 
-		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-				mHomeListViewAdapter3);
-		animAdapter.setAbsListView(mListView3);
-		mListView3.setAdapter(animAdapter);
+//		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+//				mHomeListViewAdapter3);
+//		animAdapter.setAbsListView(mListView3);
+		mListView3.setAdapter(mHomeListViewAdapter3);
 
 		mListView3.setScrollViewCallbacks(this);
 		mListView3.setOnItemClickListener(new ListItemClickListener());
@@ -278,12 +277,9 @@ public class Home_Fragment extends Fragment implements
 	private void setPtr1() {
 		ptr1 = (PtrFrameLayout) view1.findViewById(R.id.home_tab1_ptr_frame);
 
-		final float scale = getResources().getDisplayMetrics().density;
-		int pad = (int) (20 * scale + 0.5f);
-
 		// header
 		StoreHouseHeader header = new StoreHouseHeader(getActivity());
-		header.setPadding(0, pad, 0, pad);
+		header.setPadding(0, Dp2Px.dp2px(getActivity(), 20), 0, Dp2Px.dp2px(getActivity(), 20));
 		header.initWithString("TO BE OR NOT TO BE");
 
 		ptr1.setDurationToCloseHeader(1500);
@@ -345,12 +341,9 @@ public class Home_Fragment extends Fragment implements
 	private void setPtr2() {
 		ptr2 = (PtrFrameLayout) view2.findViewById(R.id.home_tab2_ptr_frame);
 
-		final float scale = getResources().getDisplayMetrics().density;
-		int pad = (int) (20 * scale + 0.5f);
-
 		// header
 		StoreHouseHeader header = new StoreHouseHeader(getActivity());
-		header.setPadding(0, pad, 0, pad);
+		header.setPadding(0, Dp2Px.dp2px(getActivity(), 20), 0, Dp2Px.dp2px(getActivity(), 20));
 		header.initWithString("THAT IS THE QUESTION");
 
 		ptr2.setDurationToCloseHeader(1500);

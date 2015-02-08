@@ -13,6 +13,7 @@ import jeese.helpme.view.BadgeView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -24,8 +25,9 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-public class MainActivity  extends ActionBarActivity{
+public class MainActivity extends ActionBarActivity {
 
+	private ActionBar actionBar;
 	private Toolbar mToolbar;
 	private TabHost tabHost;
 	private TabWidget tabWidget;
@@ -41,8 +43,8 @@ public class MainActivity  extends ActionBarActivity{
 	private People_Fragment peopleFragment;
 	private Me_Fragment meFragment;
 	private android.support.v4.app.FragmentTransaction ft;
-	private RelativeLayout tabIndicator1, tabIndicator2, tabIndicator3, tabIndicator4,
-			tabIndicator5;
+	private RelativeLayout tabIndicator1, tabIndicator2, tabIndicator3,
+			tabIndicator4, tabIndicator5;
 
 	private TextView tvTab1;
 	private ImageView ivTab1;
@@ -53,7 +55,7 @@ public class MainActivity  extends ActionBarActivity{
 	private ImageView ivTab4;
 	private TextView tvTab5;
 	private ImageView ivTab5;
-	
+
 	private View v1;
 	private View v2;
 	private View v3;
@@ -167,16 +169,18 @@ public class MainActivity  extends ActionBarActivity{
 		tabHost.setOnTabChangedListener(tabChangeListener);
 		initTab();
 		tabHost.setCurrentTab(CUSTOM_TAB);
-		
+
 		setBadgeView();
 	}
-	
+
 	private void initViews() {
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 		// toolbar.setLogo(R.drawable.ic_launcher);
 		mToolbar.setTitle("易助");// 标题的文字需在setSupportActionBar之前，不然会无效
 		// toolbar.setSubtitle("副标题");
 		setSupportActionBar(mToolbar);
+
+		actionBar = getSupportActionBar();
 	}
 
 	// 判断当前
@@ -187,6 +191,9 @@ public class MainActivity  extends ActionBarActivity{
 		} else {
 			ft.show(homeFragment);
 		}
+
+		actionBar.show();
+
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext2));
 		tvTab2.setTextColor(getResources().getColor(R.color.tabtext1));
 		tvTab4.setTextColor(getResources().getColor(R.color.tabtext1));
@@ -200,6 +207,9 @@ public class MainActivity  extends ActionBarActivity{
 		} else {
 			ft.show(discoverFragment);
 		}
+
+		actionBar.show();
+
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext1));
 		tvTab2.setTextColor(getResources().getColor(R.color.tabtext2));
 		tvTab4.setTextColor(getResources().getColor(R.color.tabtext1));
@@ -213,6 +223,9 @@ public class MainActivity  extends ActionBarActivity{
 		} else {
 			ft.show(helpFragment);
 		}
+
+		actionBar.show();
+
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext1));
 		tvTab2.setTextColor(getResources().getColor(R.color.tabtext1));
 		tvTab4.setTextColor(getResources().getColor(R.color.tabtext1));
@@ -226,6 +239,9 @@ public class MainActivity  extends ActionBarActivity{
 		} else {
 			ft.show(peopleFragment);
 		}
+
+		actionBar.show();
+
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext1));
 		tvTab2.setTextColor(getResources().getColor(R.color.tabtext1));
 		tvTab4.setTextColor(getResources().getColor(R.color.tabtext2));
@@ -239,6 +255,9 @@ public class MainActivity  extends ActionBarActivity{
 		} else {
 			ft.show(meFragment);
 		}
+
+		actionBar.show();
+
 		tvTab1.setTextColor(getResources().getColor(R.color.tabtext1));
 		tvTab2.setTextColor(getResources().getColor(R.color.tabtext1));
 		tvTab4.setTextColor(getResources().getColor(R.color.tabtext1));
@@ -325,27 +344,27 @@ public class MainActivity  extends ActionBarActivity{
 		tabHost.addTab(tSpecMe);
 
 	}
-	
-	private void setBadgeView(){
+
+	private void setBadgeView() {
 		BadgeView bv = new BadgeView(this, v1);
 		bv.setText("3");
 		bv.setTextColor(Color.WHITE);
 		bv.setTextSize(12);
 		bv.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		bv.show();
-		
+
 		BadgeView bv1 = new BadgeView(this, v3);
 		bv1.setText("1");
 		bv1.setTextColor(Color.WHITE);
 		bv1.setTextSize(12);
 		bv1.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		bv1.show();
-		
+
 		BadgeView bv2 = new BadgeView(this, v4);
 		bv2.setText("1");
 		bv2.setTextColor(Color.WHITE);
 		bv2.setTextSize(12);
-		bv2.setBadgePosition(BadgeView.POSITION_TOP_RIGHT); 
+		bv2.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		bv2.show();
 	}
 

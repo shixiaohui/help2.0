@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <ImageView android:src="@drawable/people"
-        android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <ListView
+        android:id="@+id/people_fragment_listview"
         android:layout_width="match_parent"
-        android:contentDescription="示例图片"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:divider="#c0c0c0"
+        android:dividerHeight="1px"
+        android:overScrollMode="never"
+        android:paddingLeft="15dip"
+        android:paddingRight="25dip"
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/dialog"
+        android:layout_width="80.0dip"
+        android:layout_height="80.0dip"
+        android:layout_gravity="center"
+        android:background="@drawable/voip_toast_bg"
+        android:gravity="center"
+        android:textColor="#ffffffff"
+        android:textSize="52dp"
+        android:visibility="invisible" />
+
+    <jeese.helpme.view.SideBar
+        android:id="@+id/sidrbar"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center" />
+
+</FrameLayout>
