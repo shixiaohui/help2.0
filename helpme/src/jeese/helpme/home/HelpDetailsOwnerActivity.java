@@ -9,6 +9,6 @@ public class HelpDetailsOwnerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.helpdetails_owner);
+		setContentView(R.layout.helpdetail_owner);
 	}
 }

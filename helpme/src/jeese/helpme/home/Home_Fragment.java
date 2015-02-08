@@ -1,5 +1,11 @@
 package jeese.helpme.home;
 
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.PtrUIHandler;
+import in.srain.cube.views.ptr.header.StoreHouseHeader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +15,6 @@ import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnim
 import jeese.helpme.R;
 import jeese.helpme.location.MapActivity;
 import jeese.helpme.view.PagerSlidingTabStrip;
-import jeese.helpme.view.SwipeRefreshLayout;
-import jeese.helpme.view.SwipeRefreshLayout.OnLoadListener;
-import jeese.helpme.view.SwipeRefreshLayout.OnRefreshListener;
 import jeese.helpme.view.observablescrollview.ObservableListView;
 import jeese.helpme.view.observablescrollview.ObservableScrollViewCallbacks;
 import jeese.helpme.view.observablescrollview.ScrollState;
@@ -19,7 +22,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -33,12 +35,11 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class Home_Fragment extends Fragment implements OnRefreshListener,
-		OnLoadListener, ObservableScrollViewCallbacks{
+public class Home_Fragment extends Fragment implements
+		ObservableScrollViewCallbacks {
 
 	private PagerSlidingTabStrip mPagerSlidingTabStrip;
 	private MyPagerAdapter mPagerAdapter;
@@ -52,15 +53,14 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 
 	private int pageid = 0;// 当前page的id
 
+	private PtrFrameLayout ptr1;
 	private ObservableListView mListView1;
 	private Home_ListView_Adapter mHomeListViewAdapter1;
-	private SwipeRefreshLayout mSwipeLayout1;
+	private PtrFrameLayout ptr2;
 	private ObservableListView mListView2;
 	private Home_ListView_Adapter mHomeListViewAdapter2;
-	private SwipeRefreshLayout mSwipeLayout2;
 	private ObservableListView mListView3;
 	private Home_ListView_Adapter mHomeListViewAdapter3;
-	private SwipeRefreshLayout mSwipeLayout3;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +83,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		return mView;
 	}
 
+	@SuppressLint("InflateParams")
 	private void init() {
 
 		mViewPager = (ViewPager) mView.findViewById(R.id.home_fragment_pager);
@@ -101,62 +102,66 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 
 		mPagerAdapter = new MyPagerAdapter();
 		mViewPager.setAdapter(mPagerAdapter);
-		
-		mPagerSlidingTabStrip = (PagerSlidingTabStrip) mView.findViewById(R.id.tabs);
+
+		mPagerSlidingTabStrip = (PagerSlidingTabStrip) mView
+				.findViewById(R.id.tabs);
 		mPagerSlidingTabStrip.setViewPager(mViewPager);
-		mPagerSlidingTabStrip.setOnPageChangeListener(new OnPageChangeListener() {
+		mPagerSlidingTabStrip
+				.setOnPageChangeListener(new OnPageChangeListener() {
 
-			@Override
-			public void onPageSelected(int arg0) {
-				pageid = arg0;
+					@Override
+					public void onPageSelected(int arg0) {
+						pageid = arg0;
 
-			}
+					}
 
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
+					@Override
+					public void onPageScrolled(int arg0, float arg1, int arg2) {
+					}
 
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-			}
-		});
+					@Override
+					public void onPageScrollStateChanged(int arg0) {
+					}
+				});
 		initTabsValue();
 
 	}
-	
+
 	/**
 	 * mPagerSlidingTabStrip默认值配置
 	 * 
 	 */
 	private void initTabsValue() {
 		// 底部游标颜色
-		mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(R.color.colorPrimary));
+		mPagerSlidingTabStrip.setIndicatorColor(getResources().getColor(
+				R.color.colorPrimary));
 		// tab的分割线颜色
 		mPagerSlidingTabStrip.setDividerColor(Color.TRANSPARENT);
 		// tab背景
 		mPagerSlidingTabStrip.setBackgroundColor(Color.parseColor("#FFFFFF"));
+		mPagerSlidingTabStrip.setUnderlineColor(getResources().getColor(
+				R.color.colorPrimary));
 		// tab底线高度
-		mPagerSlidingTabStrip.setUnderlineHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-				0, getResources().getDisplayMetrics()));
+		mPagerSlidingTabStrip.setUnderlineHeight((int) TypedValue
+				.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) 0.6,
+						getResources().getDisplayMetrics()));
 		// 游标高度
-		mPagerSlidingTabStrip.setIndicatorHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-				2, getResources().getDisplayMetrics()));
+		mPagerSlidingTabStrip.setIndicatorHeight((int) TypedValue
+				.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources()
+						.getDisplayMetrics()));
 		// 选中的文字颜色
 		mPagerSlidingTabStrip.setSelectedTextColor(Color.parseColor("#252525"));
 		// 正常文字颜色
 		mPagerSlidingTabStrip.setTextColor(Color.parseColor("#999999"));
-		//文字大小
-		mPagerSlidingTabStrip.setTextSize(42);
-		//自动填充屏幕
+		// 自动填充屏幕
 		mPagerSlidingTabStrip.setShouldExpand(true);
 
 	}
-	
 
 	class MyPagerAdapter extends PagerAdapter {
 
-		private final String[] TITLES = { "重要", "附近", "收藏"};
-		
+		private final String[] TITLES = { "重要", "附近", "历史" };
+
 		@Override
 		public int getCount() {
 			return TITLES.length;
@@ -187,16 +192,11 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 
 	@SuppressLint("ResourceAsColor")
 	private void setView1() {
-		mSwipeLayout1 = (SwipeRefreshLayout) view1
-				.findViewById(R.id.home_tab1_swipe_container);
-		mSwipeLayout1.setOnRefreshListener(this);
-		mSwipeLayout1.setOnLoadListener(this);
-		mSwipeLayout1.setColor(R.color.light_blue, R.color.red, R.color.green,
-				R.color.orange);
-		mSwipeLayout1.setMode(SwipeRefreshLayout.Mode.BOTH);
-		mSwipeLayout1.setLoadNoFull(false);
 
-		mListView1 = (ObservableListView) view1.findViewById(R.id.home_tab1_listview);
+		setPtr1();
+
+		mListView1 = (ObservableListView) view1
+				.findViewById(R.id.home_tab1_listview);
 
 		mHomeListViewAdapter1 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
@@ -205,7 +205,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 				mHomeListViewAdapter1);
 		animAdapter.setAbsListView(mListView1);
 		mListView1.setAdapter(animAdapter);
-		
+
 		mListView1.setScrollViewCallbacks(this);
 		mListView1.setOnItemClickListener(new ListItemClickListener());
 		mListView1.setOnItemLongClickListener(new ListItemLongClickListener());
@@ -216,16 +216,11 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 
 	@SuppressLint("ResourceAsColor")
 	private void setView2() {
-		mSwipeLayout2 = (SwipeRefreshLayout) view2
-				.findViewById(R.id.home_tab2_swipe_container);
-		mSwipeLayout2.setOnRefreshListener(this);
-		mSwipeLayout2.setOnLoadListener(this);
-		mSwipeLayout2.setColor(R.color.light_blue, R.color.red, R.color.green,
-				R.color.orange);
-		mSwipeLayout2.setMode(SwipeRefreshLayout.Mode.BOTH);
-		mSwipeLayout2.setLoadNoFull(false);
 
-		mListView2 = (ObservableListView) view2.findViewById(R.id.home_tab2_listview);
+		setPtr2();
+
+		mListView2 = (ObservableListView) view2
+				.findViewById(R.id.home_tab2_listview);
 
 		mHomeListViewAdapter2 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
@@ -234,7 +229,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 				mHomeListViewAdapter2);
 		animAdapter.setAbsListView(mListView2);
 		mListView2.setAdapter(animAdapter);
-		
+
 		mListView2.setScrollViewCallbacks(this);
 		mListView2.setOnItemClickListener(new ListItemClickListener());
 		mListView2.setOnItemLongClickListener(new ListItemLongClickListener());
@@ -245,16 +240,8 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 
 	@SuppressLint("ResourceAsColor")
 	private void setView3() {
-		mSwipeLayout3 = (SwipeRefreshLayout) view3
-				.findViewById(R.id.home_tab3_swipe_container);
-		mSwipeLayout3.setOnRefreshListener(this);
-		mSwipeLayout3.setOnLoadListener(this);
-		mSwipeLayout3.setColor(R.color.light_blue, R.color.red, R.color.green,
-				R.color.orange);
-		mSwipeLayout3.setMode(SwipeRefreshLayout.Mode.BOTH);
-		mSwipeLayout3.setLoadNoFull(false);
-
-		mListView3 = (ObservableListView) view3.findViewById(R.id.home_tab3_listview);
+		mListView3 = (ObservableListView) view3
+				.findViewById(R.id.home_tab3_listview);
 
 		mHomeListViewAdapter3 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
@@ -274,7 +261,7 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 
 	public ArrayList<Integer> getItems() {
 		ArrayList<Integer> items = new ArrayList<Integer>();
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 10; i++) {
 			items.add(i);
 		}
 		return items;
@@ -288,52 +275,138 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		return items;
 	}
 
-	@Override
-	public void onRefresh() {
-		new Handler().postDelayed(new Runnable() {
+	private void setPtr1() {
+		ptr1 = (PtrFrameLayout) view1.findViewById(R.id.home_tab1_ptr_frame);
+
+		final float scale = getResources().getDisplayMetrics().density;
+		int pad = (int) (20 * scale + 0.5f);
+
+		// header
+		StoreHouseHeader header = new StoreHouseHeader(getActivity());
+		header.setPadding(0, pad, 0, pad);
+		header.initWithString("TO BE OR NOT TO BE");
+
+		ptr1.setDurationToCloseHeader(1500);
+		ptr1.setHeaderView(header);
+		ptr1.addPtrUIHandler(header);
+		// for changing string
+		ptr1.addPtrUIHandler(new PtrUIHandler() {
+
 			@Override
-			public void run() {
-				if (pageid == 0) {
-					mHomeListViewAdapter1.addAll(0, getnewItems());
-					mSwipeLayout1.setRefreshing(false);
-					mHomeListViewAdapter1.notifyDataSetChanged();
-				} else if (pageid == 1) {
-					mHomeListViewAdapter2.addAll(0, getnewItems());
-					mSwipeLayout2.setRefreshing(false);
-					mHomeListViewAdapter2.notifyDataSetChanged();
-				} else if (pageid == 2) {
-					mHomeListViewAdapter3.addAll(0, getnewItems());
-					mSwipeLayout3.setRefreshing(false);
-					mHomeListViewAdapter3.notifyDataSetChanged();
-				} 
+			public void onUIReset(PtrFrameLayout frame) {
 
 			}
-		}, 2000);
 
+			@Override
+			public void onUIRefreshPrepare(PtrFrameLayout frame) {
+
+			}
+
+			@Override
+			public void onUIRefreshBegin(PtrFrameLayout frame) {
+
+			}
+
+			@Override
+			public void onUIRefreshComplete(PtrFrameLayout frame) {
+
+			}
+
+			@Override
+			public void onUIPositionChange(PtrFrameLayout frame,
+					boolean isUnderTouch, byte status, int oldPosition,
+					int currentPosition, float oldPercent, float currentPercent) {
+
+			}
+		});
+
+		ptr1.setPtrHandler(new PtrHandler() {
+			@Override
+			public boolean checkCanDoRefresh(PtrFrameLayout frame,
+					View content, View header) {
+				return PtrDefaultHandler.checkContentCanBePulledDown(frame,
+						content, header);
+			}
+
+			@Override
+			public void onRefreshBegin(final PtrFrameLayout ptr) {
+				ptr.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						mHomeListViewAdapter1.addAll(0, getnewItems());
+						mHomeListViewAdapter1.notifyDataSetChanged();
+						ptr.refreshComplete();
+					}
+				}, 1500);
+			}
+		});
 	}
 
-	@Override
-	public void onLoad() {
-		new Handler().postDelayed(new Runnable() {
+	private void setPtr2() {
+		ptr2 = (PtrFrameLayout) view2.findViewById(R.id.home_tab2_ptr_frame);
+
+		final float scale = getResources().getDisplayMetrics().density;
+		int pad = (int) (20 * scale + 0.5f);
+
+		// header
+		StoreHouseHeader header = new StoreHouseHeader(getActivity());
+		header.setPadding(0, pad, 0, pad);
+		header.initWithString("THAT IS THE QUESTION");
+
+		ptr2.setDurationToCloseHeader(1500);
+		ptr2.setHeaderView(header);
+		ptr2.addPtrUIHandler(header);
+		// for changing string
+		ptr2.addPtrUIHandler(new PtrUIHandler() {
+
 			@Override
-			public void run() {
-				if (pageid == 0) {
-					mHomeListViewAdapter1.addAll(getnewItems());
-					mSwipeLayout1.setLoading(false);
-					mHomeListViewAdapter1.notifyDataSetChanged();
-				} else if (pageid == 1) {
-					mHomeListViewAdapter2.addAll(getnewItems());
-					mSwipeLayout2.setLoading(false);
-					mHomeListViewAdapter2.notifyDataSetChanged();
-				} else if (pageid == 2) {
-					mHomeListViewAdapter3.addAll(getnewItems());
-					mSwipeLayout3.setLoading(false);
-					mHomeListViewAdapter3.notifyDataSetChanged();
-				}
+			public void onUIReset(PtrFrameLayout frame) {
 
 			}
-		}, 1000);
 
+			@Override
+			public void onUIRefreshPrepare(PtrFrameLayout frame) {
+
+			}
+
+			@Override
+			public void onUIRefreshBegin(PtrFrameLayout frame) {
+
+			}
+
+			@Override
+			public void onUIRefreshComplete(PtrFrameLayout frame) {
+
+			}
+
+			@Override
+			public void onUIPositionChange(PtrFrameLayout frame,
+					boolean isUnderTouch, byte status, int oldPosition,
+					int currentPosition, float oldPercent, float currentPercent) {
+
+			}
+		});
+
+		ptr2.setPtrHandler(new PtrHandler() {
+			@Override
+			public boolean checkCanDoRefresh(PtrFrameLayout frame,
+					View content, View header) {
+				return PtrDefaultHandler.checkContentCanBePulledDown(frame,
+						content, header);
+			}
+
+			@Override
+			public void onRefreshBegin(final PtrFrameLayout ptr) {
+				ptr.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						mHomeListViewAdapter2.addAll(0, getnewItems());
+						mHomeListViewAdapter2.notifyDataSetChanged();
+						ptr.refreshComplete();
+					}
+				}, 1500);
+			}
+		});
 	}
 
 	private final class ListItemButtonClickListener implements OnClickListener {
@@ -342,72 +415,16 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 			if (pageid == 0) {
 				for (int i = mListView1.getFirstVisiblePosition(); i <= mListView1
 						.getLastVisiblePosition(); i++) {
-					if (v == mListView1
-							.getChildAt(
-									i - mListView1.getFirstVisiblePosition())
-							.findViewById(
-									R.id.home_fragment_listview_item_markbutton)) {
+					if (v == mListView1.getChildAt(
+							i - mListView1.getFirstVisiblePosition())
+							.findViewById(R.id.help_card_1_locationbutton)) {
 						Toast.makeText(
 								getActivity(),
 								"Clicked on Mark Action Button of List Item "
 										+ i, Toast.LENGTH_SHORT).show();
-					} else if (v == mListView1
-							.getChildAt(
-									i - mListView1.getFirstVisiblePosition())
-							.findViewById(
-									R.id.home_fragment_listview_item_helpbutton)) {
-						Toast.makeText(
-								getActivity(),
-								"Clicked on Help Action Button of List Item "
-										+ i, Toast.LENGTH_SHORT).show();
-						Intent Intent = new Intent(getActivity(),
-								MapActivity.class);
-						startActivity(Intent);
-					}
-				}
-			} else if (pageid == 1) {
-				for (int i = mListView2.getFirstVisiblePosition(); i <= mListView2
-						.getLastVisiblePosition(); i++) {
-					if (v == mListView2
-							.getChildAt(
-									i - mListView2.getFirstVisiblePosition())
-							.findViewById(
-									R.id.home_fragment_listview_item_markbutton)) {
-						Toast.makeText(
-								getActivity(),
-								"Clicked on Mark Action Button of List Item "
-										+ i, Toast.LENGTH_SHORT).show();
-					} else if (v == mListView2
-							.getChildAt(
-									i - mListView2.getFirstVisiblePosition())
-							.findViewById(
-									R.id.home_fragment_listview_item_helpbutton)) {
-						Toast.makeText(
-								getActivity(),
-								"Clicked on Help Action Button of List Item "
-										+ i, Toast.LENGTH_SHORT).show();
-						Intent Intent = new Intent(getActivity(),
-								MapActivity.class);
-						startActivity(Intent);
-					}
-				}
-			} else if (pageid == 2) {
-				for (int i = mListView3.getFirstVisiblePosition(); i <= mListView3
-						.getLastVisiblePosition(); i++) {
-					if (v == mListView3
-							.getChildAt(
-									i - mListView3.getFirstVisiblePosition())
-							.findViewById(
-									R.id.home_fragment_listview_item_markbutton)) {
-						Toast.makeText(
-								getActivity(),
-								"Clicked on Mark Action Button of List Item "
-										+ i, Toast.LENGTH_SHORT).show();
-					} else if (v == mListView3
-							.getChildAt(
-									i - mListView3.getFirstVisiblePosition())
-							.findViewById(
-									R.id.home_fragment_listview_item_helpbutton)) {
+					} else if (v == mListView1.getChildAt(
+							i - mListView1.getFirstVisiblePosition())
+							.findViewById(R.id.help_card_1_helpbutton)) {
 						Toast.makeText(
 								getActivity(),
 								"Clicked on Help Action Button of List Item "
@@ -426,9 +443,21 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Intent Intent = new Intent(getActivity(),
-					HelpDetailsVisitorActivity.class);
-			startActivity(Intent);
+			if (pageid == 0) {
+				Intent Intent = new Intent(getActivity(),
+						HelpDetailsVisitorActivity.class);
+				startActivity(Intent);
+
+			} else if (pageid == 1) {
+				Intent Intent = new Intent(getActivity(),
+						AskDeatilsVisitorActivity.class);
+				startActivity(Intent);
+			} else {
+				Intent Intent = new Intent(getActivity(),
+						AskDeatilsOwnerActivity.class);
+				startActivity(Intent);
+			}
+
 		}
 	}
 
@@ -449,29 +478,29 @@ public class Home_Fragment extends Fragment implements OnRefreshListener,
 	public void onScrollChanged(int scrollY, boolean firstScroll,
 			boolean dragging) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onDownMotionEvent() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-        ActionBar actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
-        if (scrollState == ScrollState.UP) {
-            if (actionBar.isShowing()) {
-                actionBar.hide();
-            }
-        } else if (scrollState == ScrollState.DOWN) {
-            if (!actionBar.isShowing()) {
-                actionBar.show();
-            }
-        }
+		ActionBar actionBar = ((ActionBarActivity) getActivity())
+				.getSupportActionBar();
+		if (scrollState == ScrollState.UP) {
+			if (actionBar.isShowing()) {
+				actionBar.hide();
+			}
+		} else if (scrollState == ScrollState.DOWN) {
+			if (!actionBar.isShowing()) {
+				actionBar.show();
+			}
+		}
 
-		
 	}
 
 }

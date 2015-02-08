@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,8 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="72dp"
-            android:alpha="0.54"
-             />
+            android:alpha="0.54" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,8 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="安全求助"
                 android:alpha="0.72"
+                android:text="安全求助"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -76,8 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="健康求助"
                 android:alpha="0.72"
+                android:text="健康求助"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -103,8 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="生活求助"
                 android:alpha="0.72"
+                android:text="生活求助"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
@@ -138,8 +137,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="情感求助"
                 android:alpha="0.72"
+                android:text="情感求助"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -165,8 +164,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="其他求助"
                 android:alpha="0.72"
+                android:text="其他求助"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -192,8 +191,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="我要提问"
                 android:alpha="0.72"
+                android:text="我要提问"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
