@@ -1,6 +1,5 @@
 package jeese.helpme.application;
 
-import jeese.helpme.R;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import cn.jpush.android.api.JPushInterface;

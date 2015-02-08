@@ -1,8 +1,5 @@
 package jeese.helpme.service;
 
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
 import jeese.helpme.headset.HeadSetHelper;
 import jeese.helpme.headset.HeadSetHelper.OnHeadSetListener;
 import android.app.Service;
@@ -64,31 +61,31 @@ public class MainService extends Service {
 	OnHeadSetListener headSetListener = new OnHeadSetListener() {
 		@Override
 		public void onFiveClick() {
-			AjaxParams params = new AjaxParams();
-			params.put("username", "michael yang");
-			params.put("password", "123456");
-			params.put("email", "test@tsz.net");
-
-			FinalHttp fh = new FinalHttp();
-			fh.post("www.baidu.com", params, new AjaxCallBack<Object>() {
-				@Override
-				public void onStart() {
-				};
-
-				@Override
-				public void onLoading(long count, long current) {
-
-				};
-
-				@Override
-				public void onSuccess(Object t) {
-					System.out.println("返回信息是+" + t.toString());
-				};
-
-				@Override
-				public void onFailure(Throwable t, int errorNo, String strMsg) {
-				};
-			});
+//			AjaxParams params = new AjaxParams();
+//			params.put("username", "michael yang");
+//			params.put("password", "123456");
+//			params.put("email", "test@tsz.net");
+//
+//			FinalHttp fh = new FinalHttp();
+//			fh.post("www.baidu.com", params, new AjaxCallBack<Object>() {
+//				@Override
+//				public void onStart() {
+//				};
+//
+//				@Override
+//				public void onLoading(long count, long current) {
+//
+//				};
+//
+//				@Override
+//				public void onSuccess(Object t) {
+//					System.out.println("返回信息是+" + t.toString());
+//				};
+//
+//				@Override
+//				public void onFailure(Throwable t, int errorNo, String strMsg) {
+//				};
+//			});
 
 		}
 
@@ -98,31 +95,31 @@ public class MainService extends Service {
 			Toast.makeText(getApplicationContext(),
 					"按了一下求助按钮",
 					Toast.LENGTH_SHORT).show();
-			AjaxParams params = new AjaxParams();
-			params.put("username", "michael yang");
-			params.put("password", "123456");
-			params.put("email", "test@tsz.net");
-
-			FinalHttp fh = new FinalHttp();
-			fh.post("www.baidu.com", params, new AjaxCallBack<Object>() {
-				@Override
-				public void onStart() {
-				};
-
-				@Override
-				public void onLoading(long count, long current) {
-
-				};
-
-				@Override
-				public void onSuccess(Object t) {
-					System.out.println("返回信息是+" + t.toString());
-				};
-
-				@Override
-				public void onFailure(Throwable t, int errorNo, String strMsg) {
-				};
-			});
+//			AjaxParams params = new AjaxParams();
+//			params.put("username", "michael yang");
+//			params.put("password", "123456");
+//			params.put("email", "test@tsz.net");
+//
+//			FinalHttp fh = new FinalHttp();
+//			fh.post("www.baidu.com", params, new AjaxCallBack<Object>() {
+//				@Override
+//				public void onStart() {
+//				};
+//
+//				@Override
+//				public void onLoading(long count, long current) {
+//
+//				};
+//
+//				@Override
+//				public void onSuccess(Object t) {
+//					System.out.println("返回信息是+" + t.toString());
+//				};
+//
+//				@Override
+//				public void onFailure(Throwable t, int errorNo, String strMsg) {
+//				};
+//			});
 		}
 	};
 }

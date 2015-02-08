@@ -1,7 +1,5 @@
 package jeese.helpme.discover;
 
-import net.tsz.afinal.FinalBitmap;
-
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMap.OnCameraChangeListener;
 import com.amap.api.maps.AMap.OnMapLoadedListener;
@@ -16,6 +14,7 @@ import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.lidroid.xutils.BitmapUtils;
 
 import jeese.helpme.R;
 import jeese.helpme.service.LocationService;
@@ -37,7 +36,7 @@ public class Discover_Fragment extends Fragment implements
 	private AMap aMap;
 	private UiSettings mUiSettings;
 
-	private FinalBitmap fb;
+	private BitmapUtils bitmapUtils;
 	private View marker_icon;
 	
 	private int color = 0;
@@ -48,8 +47,8 @@ public class Discover_Fragment extends Fragment implements
 		mView = View.inflate(getActivity(), R.layout.discover_fragment, null);
 		mapView = (MapView) mView.findViewById(R.id.discover_fragment_mapview);
 		mapView.onCreate(savedInstanceState);// 必须要写
-		fb = FinalBitmap.create(getActivity());// 初始化FinalBitmap模块
-		fb.configLoadingImage(R.drawable.user_head);
+		bitmapUtils = new BitmapUtils(getActivity());
+		bitmapUtils.configDefaultLoadingImage(R.drawable.user_head);
 		init();
 		setMarker();
 	}
@@ -103,7 +102,7 @@ public class Discover_Fragment extends Fragment implements
 
 		ImageView markicon_bg = (ImageView) marker_icon
 				.findViewById(R.id.discover_marker_icon_bg);
-		fb.display(markicon_headimage,
+		bitmapUtils.display(markicon_headimage,
 				"http://p.qq181.com/cms/1210/2012100413195471481.jpg");
 		markicon_bg.setImageResource(R.drawable.markericon_1);
 
@@ -192,7 +191,7 @@ public class Discover_Fragment extends Fragment implements
 
 		ImageView markicon_bg = (ImageView) marker_icon
 				.findViewById(R.id.discover_marker_icon_bg);
-		fb.display(markicon_headimage,
+		bitmapUtils.display(markicon_headimage,
 				"http://p.qq181.com/cms/1210/2012100413195471481.jpg");
 		if(color == 0){
 			markicon_bg.setImageResource(R.drawable.markericon_1);
