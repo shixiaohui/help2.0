@@ -2,10 +2,8 @@ package jeese.helpme.home;
 
 import java.util.ArrayList;
 
-import com.haarman.listviewanimations.swinginadapters.AnimationAdapter;
-import com.haarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
-
 import jeese.helpme.R;
+import jeese.helpme.adapter.HelpDetailsVisitor_Listview_Adapter;
 import jeese.helpme.view.SildingFinishLayout;
 import jeese.helpme.view.SildingFinishLayout.OnSildingFinishListener;
 import android.os.Bundle;
@@ -46,10 +44,10 @@ public class HelpDetailsVisitorActivity extends ActionBarActivity{
 		mListView1.setOnItemClickListener(new ListItemClickListener());
 		mListView1.setOnItemLongClickListener(new ListItemLongClickListener());
 		
-		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-				mhelpdetailsListViewAdapter);
-		animAdapter.setAbsListView(mListView1);
-		mListView1.setAdapter(animAdapter);
+//		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+//				mhelpdetailsListViewAdapter);
+//		animAdapter.setAbsListView(mListView1);
+		mListView1.setAdapter(mhelpdetailsListViewAdapter);
 		
 		mhelpdetailsListViewAdapter.addAll(getItems());
 
