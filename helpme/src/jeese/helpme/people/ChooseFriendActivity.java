@@ -13,6 +13,7 @@ import jeese.helpme.view.SideBar;
 import jeese.helpme.view.SildingFinishLayout;
 import jeese.helpme.view.SideBar.OnTouchingLetterChangedListener;
 import jeese.helpme.view.SildingFinishLayout.OnSildingFinishListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -135,6 +136,10 @@ public class ChooseFriendActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.putExtra("check_num", checknum);
+				// 设置结果信息
+				setResult(007, intent);// 需要提前定义变量resultCode，初始值大于0
 				finish();
 
 			}
