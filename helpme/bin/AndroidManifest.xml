@@ -62,6 +62,16 @@
         </receiver>
 
         <activity
+            android:name=".activity.PhoneActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".people.FriendActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
@@ -90,6 +100,11 @@
         </activity>
         <activity
             android:name=".home.AskDeatilsVisitorActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".people.ChooseFriendActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
@@ -197,8 +212,6 @@
             android:name="RONG_CLOUD_APP_KEY"
             android:value="k51hidwq1fspb" />
 
-        <service android:name="io.rong.imlib.RongService" />
-
         <activity
             android:name="io.rong.imkit.RongActivity"
             android:screenOrientation="portrait" >
@@ -298,6 +311,7 @@
             android:exported="false"
             android:priority="1000" >
         </service>
+        <service android:name="io.rong.imlib.RongService" />
         <service
             android:name="io.rong.imlib.push.PushService"
             android:process=":push" >
@@ -339,6 +353,7 @@
 
 
         <!-- Begin JPush -->
+
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="developer-default" />

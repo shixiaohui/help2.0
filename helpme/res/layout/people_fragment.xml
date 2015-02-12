@@ -10,10 +10,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:divider="#c0c0c0"
-        android:dividerHeight="1px"
+        android:dividerHeight="0dp"
         android:overScrollMode="never"
-        android:paddingLeft="15dip"
-        android:paddingRight="25dip"
         android:scrollbars="none" />
 
     <TextView
