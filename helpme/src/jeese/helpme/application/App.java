@@ -18,7 +18,7 @@ public class App extends Application {
 		// 初始化。
 		RongIM.init(this);
 		
-		//RongIM.init(this, "e7x8xycsx6flq", R.drawable.ic_launcher);
+		//RongIM.init(this, "k51hidwq1fspb", R.drawable.ic_launcher);
 		
 		// 从您的应用服务器请求，以获取 Token。在本示例中我们直接在下面 hardcode 给 token 赋值。
 		// String token = getTokenFromAppServer();
@@ -27,12 +27,17 @@ public class App extends Application {
 
 		// 001
 		// 小狗
-		String token = "gmeGPMbpkNpRVFqmRk49jf9JXx3k/zTlRSJ1G8Af9CI3U4e9lF3jnvQKYp2ecC/dBVc7XyuL9skbqunN048Scg==";
+		//String token = "gmeGPMbpkNpRVFqmRk49jf9JXx3k/zTlRSJ1G8Af9CI3U4e9lF3jnvQKYp2ecC/dBVc7XyuL9skbqunN048Scg==";
 
 		// 002
 		// 小牛
 		//String token = "yg9B/Wh0bZm9Wab05Ia5Af9JXx3k/zTlRSJ1G8Af9CI3U4e9lF3jnlvB84WBZ50UdgkvtOX7ULs5ATrHbF6P1g==";
 
+		// 003
+		// 小蓝孩
+		String token = "wjfvk2IpBXF+sB/wrTU7icgXtCAuovQvahXBtnZqSZmQjRdyLfCC8elmntSLtDK7+ykyqIE2k4IxxMHaZ6bvcw==";
+
+		
 		// 连接融云服务器。
 		try {
 			RongIM.connect(token, new RongIMClient.ConnectCallback() {

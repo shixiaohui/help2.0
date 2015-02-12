@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jeese.helpme.view.SildingFinishLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sildingFinishLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        android:orientation="vertical" >
+
+        <include layout="@layout/toolbar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white" >
+
+            <ListView
+                android:id="@+id/friend_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:divider="#c0c0c0"
+                android:dividerHeight="0dp"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+            <TextView
+                android:id="@+id/dialog"
+                android:layout_width="80.0dip"
+                android:layout_height="80.0dip"
+                android:layout_gravity="center"
+                android:background="@drawable/voip_toast_bg"
+                android:gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="52dp"
+                android:visibility="invisible" />
+
+            <jeese.helpme.view.SideBar
+                android:id="@+id/sidrbar"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/tag_1" >
+
+            <Button
+                android:id="@+id/finish"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:text="完成"
+                android:textColor="@color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
+</jeese.helpme.view.SildingFinishLayout>

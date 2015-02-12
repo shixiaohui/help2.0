@@ -108,6 +108,7 @@ public class AskDeatilsVisitorActivity extends ActionBarActivity {
 		setSupportActionBar(mToolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+		
 		/* 菜单的监听可以在toolbar里设置，也可以像ActionBar那样，通过下面的两个回调方法来处理 */
 		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 			@Override
