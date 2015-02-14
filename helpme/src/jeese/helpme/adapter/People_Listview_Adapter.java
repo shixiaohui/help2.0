@@ -6,6 +6,7 @@ import com.lidroid.xutils.BitmapUtils;
 
 import jeese.helpme.R;
 import jeese.helpme.model.SortModel;
+import jeese.helpme.view.CircleImageView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -55,7 +56,8 @@ public class People_Listview_Adapter extends BaseAdapter implements SectionIndex
 		if (view == null) {
 			viewHolder = new ViewHolder();
 			view = LayoutInflater.from(mContext).inflate(R.layout.people_listview_item_1, null);
-			viewHolder.tvHead = (ImageView)view.findViewById(R.id.head_img);
+			viewHolder.headimage = (CircleImageView) view.findViewById(R.id.headimage);
+			viewHolder.circle = (ImageView)view.findViewById(R.id.circleimage);
 			viewHolder.tvTitle = (TextView) view.findViewById(R.id.title);
 			viewHolder.tvLetter = (TextView) view.findViewById(R.id.catalog);
 			view.setTag(viewHolder);
@@ -74,7 +76,7 @@ public class People_Listview_Adapter extends BaseAdapter implements SectionIndex
 			viewHolder.tvLetter.setVisibility(View.GONE);
 		}
 	
-		bitmapUtils.display(viewHolder.tvHead, this.list.get(position).getImgSrc());
+		bitmapUtils.display(viewHolder.headimage, this.list.get(position).getImgSrc());
 		
 		viewHolder.tvTitle.setText(this.list.get(position).getName());
 		//viewHolder.tvTitle.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//ÏÂ»®Ïß
@@ -86,7 +88,8 @@ public class People_Listview_Adapter extends BaseAdapter implements SectionIndex
 
 
 	final static class ViewHolder {
-		ImageView tvHead;
+		CircleImageView headimage;
+		ImageView circle;
 		TextView tvLetter;
 		TextView tvTitle;
 	}

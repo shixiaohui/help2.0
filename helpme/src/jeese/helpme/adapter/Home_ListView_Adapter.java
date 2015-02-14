@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 	private Context mContext;
 	private final OnClickListener itemButtonClickListener;
 	private BitmapUtils bitmapUtils;
-	
+
 	private ArrayList<Integer> myList;
 
 	// 2种不同的布局
@@ -76,6 +77,8 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 						.findViewById(R.id.ask_card_1_headimage);
 				holderAsk.headimagebutton = (ImageButton) view
 						.findViewById(R.id.ask_card_1_headimagebutton);
+				holderAsk.messagebutton = (Button) view
+						.findViewById(R.id.ask_card_1_messagebutton);
 
 				holderAsk.titletext.setText("我有话要说");
 				holderAsk.contenttext
@@ -86,6 +89,8 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 						"http://p.qq181.com/cms/1210/2012100413195471481.jpg");
 				if (itemButtonClickListener != null) {
 					holderAsk.headimagebutton
+							.setOnClickListener(itemButtonClickListener);
+					holderAsk.messagebutton
 							.setOnClickListener(itemButtonClickListener);
 				}
 
@@ -104,16 +109,22 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 						.findViewById(R.id.help_card_1_headimage);
 				holderHelp.headimagebutton = (ImageButton) view
 						.findViewById(R.id.help_card_1_headimagebutton);
+				holderHelp.messagebutton = (Button) view
+						.findViewById(R.id.help_card_1_messagebutton);
 
 				holderHelp.titletext.setText("天王盖地虎，宝塔镇河妖。你脸红什么？精神焕发！");
 				holderHelp.contenttext
 						.setText("Google Polymer框架，在2013年的Google I/O大会上发布。其来自加盟谷歌的原Palm webOS的Enyo框架团队打造，使用了最新的浏览器特性。但是对于目前仍然处于开发阶段的框架，又如何吸引开发者去使用呢？以前几乎没有，但是现在Material design推出之后，也许会有所改观。");
 				holderHelp.headimagebutton
 						.setImageResource(R.drawable.headbutton_1);
-				bitmapUtils.display(holderHelp.headimage,
-						"http://img4.duitang.com/uploads/item/201302/20/20130220221710_u8zLv.thumb.700_0.jpeg");
+				bitmapUtils
+						.display(
+								holderHelp.headimage,
+								"http://img4.duitang.com/uploads/item/201302/20/20130220221710_u8zLv.thumb.700_0.jpeg");
 				if (itemButtonClickListener != null) {
 					holderHelp.headimagebutton
+							.setOnClickListener(itemButtonClickListener);
+					holderHelp.messagebutton
 							.setOnClickListener(itemButtonClickListener);
 				}
 
@@ -137,6 +148,8 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 				if (itemButtonClickListener != null) {
 					holderAsk.headimagebutton
 							.setOnClickListener(itemButtonClickListener);
+					holderAsk.messagebutton
+							.setOnClickListener(itemButtonClickListener);
 				}
 
 				break;
@@ -148,10 +161,14 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 						.setText("Google Polymer框架，在2013年的Google I/O大会上发布。其来自加盟谷歌的原Palm webOS的Enyo框架团队打造，使用了最新的浏览器特性。但是对于目前仍然处于开发阶段的框架，又如何吸引开发者去使用呢？以前几乎没有，但是现在Material design推出之后，也许会有所改观。");
 				holderHelp.headimagebutton
 						.setImageResource(R.drawable.headbutton_1);
-				bitmapUtils.display(holderHelp.headimage,
-						"http://img4.duitang.com/uploads/item/201302/20/20130220221710_u8zLv.thumb.700_0.jpeg");
+				bitmapUtils
+						.display(
+								holderHelp.headimage,
+								"http://img4.duitang.com/uploads/item/201302/20/20130220221710_u8zLv.thumb.700_0.jpeg");
 				if (itemButtonClickListener != null) {
 					holderHelp.headimagebutton
+							.setOnClickListener(itemButtonClickListener);
+					holderHelp.messagebutton
 							.setOnClickListener(itemButtonClickListener);
 				}
 
@@ -198,6 +215,7 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 		TextView contenttext;
 		CircleImageView headimage;
 		ImageButton headimagebutton;
+		Button messagebutton;
 	}
 
 	private static class ViewHolderHelp {
@@ -205,7 +223,7 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 		TextView contenttext;
 		CircleImageView headimage;
 		ImageButton headimagebutton;
+		Button messagebutton;
 	}
-
 
 }

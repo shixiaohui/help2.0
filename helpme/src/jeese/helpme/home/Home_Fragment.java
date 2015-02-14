@@ -5,13 +5,14 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.PtrUIHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
+import io.rong.imkit.RongIM;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jeese.helpme.R;
 import jeese.helpme.adapter.Home_ListView_Adapter;
-import jeese.helpme.location.MapActivity;
+import jeese.helpme.people.ChooseFriendActivity;
 import jeese.helpme.util.Dp2Px;
 import jeese.helpme.view.PagerSlidingTabStrip;
 import jeese.helpme.view.observablescrollview.ObservableListView;
@@ -21,6 +22,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -61,6 +63,8 @@ public class Home_Fragment extends Fragment implements
 	private ObservableListView mListView3;
 	private Home_ListView_Adapter mHomeListViewAdapter3;
 
+	private Handler mHandler;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,6 +88,8 @@ public class Home_Fragment extends Fragment implements
 
 	@SuppressLint("InflateParams")
 	private void init() {
+
+		mHandler = new Handler();
 
 		mViewPager = (ViewPager) mView.findViewById(R.id.home_fragment_pager);
 
@@ -141,9 +147,7 @@ public class Home_Fragment extends Fragment implements
 		mPagerSlidingTabStrip.setUnderlineColor(getResources().getColor(
 				R.color.colorPrimary));
 		// tab底线高度
-		mPagerSlidingTabStrip.setUnderlineHeight((int) TypedValue
-				.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (float) 0.6,
-						getResources().getDisplayMetrics()));
+		mPagerSlidingTabStrip.setUnderlineHeight(1);
 		// 游标高度
 		mPagerSlidingTabStrip.setIndicatorHeight((int) TypedValue
 				.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources()
@@ -200,9 +204,9 @@ public class Home_Fragment extends Fragment implements
 		mHomeListViewAdapter1 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
 
-//		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-//				mHomeListViewAdapter1);
-//		animAdapter.setAbsListView(mListView1);
+		// AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+		// mHomeListViewAdapter1);
+		// animAdapter.setAbsListView(mListView1);
 		mListView1.setAdapter(mHomeListViewAdapter1);
 
 		mListView1.setScrollViewCallbacks(this);
@@ -224,9 +228,9 @@ public class Home_Fragment extends Fragment implements
 		mHomeListViewAdapter2 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
 
-//		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-//				mHomeListViewAdapter2);
-//		animAdapter.setAbsListView(mListView2);
+		// AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+		// mHomeListViewAdapter2);
+		// animAdapter.setAbsListView(mListView2);
 		mListView2.setAdapter(mHomeListViewAdapter2);
 
 		mListView2.setScrollViewCallbacks(this);
@@ -245,9 +249,9 @@ public class Home_Fragment extends Fragment implements
 		mHomeListViewAdapter3 = new Home_ListView_Adapter(getActivity(), null,
 				new ListItemButtonClickListener());
 
-//		AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
-//				mHomeListViewAdapter3);
-//		animAdapter.setAbsListView(mListView3);
+		// AnimationAdapter animAdapter = new SwingBottomInAnimationAdapter(
+		// mHomeListViewAdapter3);
+		// animAdapter.setAbsListView(mListView3);
 		mListView3.setAdapter(mHomeListViewAdapter3);
 
 		mListView3.setScrollViewCallbacks(this);
@@ -279,7 +283,8 @@ public class Home_Fragment extends Fragment implements
 
 		// header
 		StoreHouseHeader header = new StoreHouseHeader(getActivity());
-		header.setPadding(0, Dp2Px.dp2px(getActivity(), 20), 0, Dp2Px.dp2px(getActivity(), 20));
+		header.setPadding(0, Dp2Px.dp2px(getActivity(), 20), 0,
+				Dp2Px.dp2px(getActivity(), 20));
 		header.initWithString("TO BE OR NOT TO BE");
 
 		ptr1.setDurationToCloseHeader(1500);
@@ -343,7 +348,8 @@ public class Home_Fragment extends Fragment implements
 
 		// header
 		StoreHouseHeader header = new StoreHouseHeader(getActivity());
-		header.setPadding(0, Dp2Px.dp2px(getActivity(), 20), 0, Dp2Px.dp2px(getActivity(), 20));
+		header.setPadding(0, Dp2Px.dp2px(getActivity(), 20), 0,
+				Dp2Px.dp2px(getActivity(), 20));
 		header.initWithString("THAT IS THE QUESTION");
 
 		ptr2.setDurationToCloseHeader(1500);
@@ -410,21 +416,34 @@ public class Home_Fragment extends Fragment implements
 						.getLastVisiblePosition(); i++) {
 					if (v == mListView1.getChildAt(
 							i - mListView1.getFirstVisiblePosition())
-							.findViewById(R.id.help_card_1_locationbutton)) {
-						Toast.makeText(
-								getActivity(),
-								"Clicked on Mark Action Button of List Item "
-										+ i, Toast.LENGTH_SHORT).show();
+							.findViewById(R.id.help_card_1_messagebutton)) {
+
+						mHandler.post(new Runnable() {
+							@Override
+							public void run() {
+								String userId = "002";
+								String title = "对方的昵称";
+
+								RongIM.getInstance().startPrivateChat(
+										getActivity(), userId, title);
+							}
+						});
+
 					} else if (v == mListView1.getChildAt(
 							i - mListView1.getFirstVisiblePosition())
-							.findViewById(R.id.help_card_1_helpbutton)) {
-						Toast.makeText(
-								getActivity(),
-								"Clicked on Help Action Button of List Item "
-										+ i, Toast.LENGTH_SHORT).show();
-						Intent Intent = new Intent(getActivity(),
-								MapActivity.class);
-						startActivity(Intent);
+							.findViewById(R.id.ask_card_1_messagebutton)) {
+
+						mHandler.post(new Runnable() {
+							@Override
+							public void run() {
+								String userId = "002";
+								String title = "对方的昵称";
+
+								RongIM.getInstance().startPrivateChat(
+										getActivity(), userId, title);
+							}
+						});
+
 					}
 				}
 			}
@@ -459,9 +478,9 @@ public class Home_Fragment extends Fragment implements
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view,
 				int position, long id) {
-			Toast.makeText(getActivity(),
-					"LongClicked on List Item " + position, Toast.LENGTH_SHORT)
-					.show();
+			Intent Intent = new Intent(getActivity(),
+					ChooseFriendActivity.class);
+			startActivity(Intent);
 			return true;
 		}
 

@@ -1,5 +1,6 @@
 package jeese.helpme.activity;
 
+import io.rong.imkit.RongIM;
 import jeese.helpme.R;
 import jeese.helpme.discover.Discover_Fragment;
 import jeese.helpme.help.Help_Fragment;
@@ -17,6 +18,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -181,6 +184,43 @@ public class MainActivity extends ActionBarActivity {
 		setSupportActionBar(mToolbar);
 
 		actionBar = getSupportActionBar();
+
+		/* 菜单的监听可以在toolbar里设置，也可以像ActionBar那样，通过下面的两个回调方法来处理 */
+		mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				switch (item.getItemId()) {
+				case R.id.action_message:
+					// 启动会话列表
+					RongIM.getInstance().startConversationList(
+							MainActivity.this);
+					return true;
+				default:
+					break;
+				}
+				return true;
+			}
+		});
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		getMenuInflater().inflate(R.menu.main, menu);
+//		MenuItem message = menu.findItem(R.id.action_message);
+//		message.setIcon(icon)
+		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		super.onPrepareOptionsMenu(menu);
+
+//		MenuItem message = menu.findItem(R.id.action_message);
+//		message.setIcon(icon)
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	// 判断当前
@@ -366,6 +406,6 @@ public class MainActivity extends ActionBarActivity {
 		bv2.setTextSize(12);
 		bv2.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		bv2.show();
-	}
 
+	}
 }
