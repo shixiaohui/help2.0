@@ -5,7 +5,7 @@
         <!-- toolbar（actionbar）颜色 -->
         <item name="colorPrimary">#037b4a</item>
         <!-- 状态栏颜色 -->
-        <item name="colorPrimaryDark">#0b8043</item>
+        <item name="colorPrimaryDark">#02623c</item>
         <!-- 窗口的背景颜色 -->
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
@@ -29,7 +29,7 @@
         <!-- toolbar（actionbar）颜色 -->
         <item name="colorPrimary">#037b4a</item>
         <!-- 状态栏颜色 -->
-        <item name="colorPrimaryDark">#0b8043</item>
+        <item name="colorPrimaryDark">#02623c</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowActionBarOverlay">true</item>
@@ -41,10 +41,15 @@
         <!-- toolbar（actionbar）颜色 -->
         <item name="colorPrimary">#037b4a</item>
         <!-- 状态栏颜色 -->
-        <item name="colorPrimaryDark">#0b8043</item>
+        <item name="colorPrimaryDark">#02623c</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
+    <style name="Theme.Start" parent="android:Theme">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
 </resources>

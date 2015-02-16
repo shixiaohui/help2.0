@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@null"
                 android:scaleType="fitXY"
-                android:src="@drawable/headbutton_1" />
+                android:src="@drawable/circle_white_45" />
 
             <ImageView
                 android:id="@+id/checkimage"

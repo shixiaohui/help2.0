@@ -14,6 +14,7 @@ import com.lidroid.xutils.util.PreferencesCookieStore;
 
 import jeese.helpme.R;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -68,12 +69,13 @@ public class PhoneActivity extends ActionBarActivity {
 
 					try {
 						JSONObject jsonObject = new JSONObject();
-						jsonObject.put("cellPhone", "110120119");
+						jsonObject.put("cellPhone", "110110_33");
 						jsonObject.put("password", "helloworld");
-						jsonObject.put("nickname", "张全蛋");
+						jsonObject.put("nickname", "张全蛋_03");
 						RequestParams params = new RequestParams();
 						params.addBodyParameter("fields", jsonObject.toString());
 						HttpUtils http1 = new HttpUtils();
+						http1.configCookieStore(preferencesCookieStore);
 						http1.send(HttpRequest.HttpMethod.POST,
 								"http://120.24.208.130:3333/api/auth/register",
 								params, new RequestCallBack<String>() {
@@ -291,6 +293,14 @@ public class PhoneActivity extends ActionBarActivity {
 					break;
 					
 				case R.id.set:
+					
+					SharedPreferences preferences = getSharedPreferences("e_help",
+							Context.MODE_PRIVATE);
+					String sessionId = preferences.getString("sessionId", null);
+					BasicClientCookie cookie = new BasicClientCookie("SESSION", sessionId);
+					cookie.setDomain("120.24.208.130");
+					cookie.setPath("/api/user");
+					preferencesCookieStore.addCookie(cookie);
 
 					try {
 						JSONObject jsonObject = new JSONObject();
@@ -339,6 +349,9 @@ public class PhoneActivity extends ActionBarActivity {
 		register.setOnClickListener(mylistener);
 
 		registertext = (TextView) findViewById(R.id.registertext);
+		SharedPreferences preferences = getSharedPreferences("e_help",
+				Context.MODE_PRIVATE);
+		registertext.setText(preferences.getString("sessionId", null));
 
 		login = (Button) findViewById(R.id.login);
 		login.setOnClickListener(mylistener);
