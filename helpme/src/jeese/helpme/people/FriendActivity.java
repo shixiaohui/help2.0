@@ -14,6 +14,7 @@ import com.lidroid.xutils.util.PreferencesCookieStore;
 
 import jeese.helpme.R;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -178,10 +179,18 @@ public class FriendActivity extends ActionBarActivity {
 					break;
 
 				case R.id.addfriend:
+					
+					SharedPreferences preferences = getSharedPreferences("e_help",
+							Context.MODE_PRIVATE);
+					String sessionId = preferences.getString("sessionId", null);
+					BasicClientCookie cookie = new BasicClientCookie("SESSION", sessionId);
+					cookie.setDomain("120.24.208.130");
+					cookie.setPath("/api/relation");
+					preferencesCookieStore.addCookie(cookie);
 
 					try {
 						JSONObject jsonObject = new JSONObject();
-						jsonObject.put("cellPhone", "110120119");
+						jsonObject.put("friendId", "110110_11");
 
 						RequestParams params = new RequestParams();
 						params.addBodyParameter("fields", jsonObject.toString());
@@ -189,7 +198,7 @@ public class FriendActivity extends ActionBarActivity {
 						http4.configCookieStore(preferencesCookieStore);
 						http4.send(
 								HttpRequest.HttpMethod.POST,
-								"http://120.24.208.130:3333/api/auth/checkPhone",
+								"http://120.24.208.130:3333/api/relation/addFriendByPhone",
 								params, new RequestCallBack<String>() {
 
 									@Override
@@ -215,11 +224,20 @@ public class FriendActivity extends ActionBarActivity {
 					break;
 
 				case R.id.logout:
+					
+					SharedPreferences preferences1 = getSharedPreferences("e_help",
+							Context.MODE_PRIVATE);
+					String sessionId1 = preferences1.getString("sessionId", null);
+					BasicClientCookie cookie1 = new BasicClientCookie("SESSION", sessionId1);
+					cookie1.setDomain("120.24.208.130");
+					cookie1.setPath("/api/relation");
+					preferencesCookieStore.addCookie(cookie1);
+
 
 					HttpUtils http5 = new HttpUtils();
 					http5.configCookieStore(preferencesCookieStore);
 					http5.send(HttpRequest.HttpMethod.POST,
-							"http://120.24.208.130:3333/api/auth/logout",
+							"http://120.24.208.130:3333/api/relation/solicitlist",
 							new RequestCallBack<String>() {
 
 								@Override

@@ -37,6 +37,7 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 		this.itemButtonClickListener = itemButtonClickListener;
 		bitmapUtils = new BitmapUtils(mContext);
 		bitmapUtils.configDefaultLoadingImage(R.drawable.user_head);
+
 	}
 
 	// @Override
@@ -171,7 +172,7 @@ public class Home_ListView_Adapter extends ArrayAdapter<Integer> {
 					holderHelp.messagebutton
 							.setOnClickListener(itemButtonClickListener);
 				}
-
+				
 				break;
 
 			default:
