@@ -48,7 +48,7 @@
     </style>
 
     <style name="Theme.Start" parent="android:Theme">
-        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
