@@ -27,7 +27,7 @@ public class App extends Application {
 	private String sessionId = null;
 
 	private PreferencesCookieStore preferencesCookieStore;
-	
+
 	private Handler handler = new Handler();
 
 	public String getSessionId() {
@@ -39,8 +39,6 @@ public class App extends Application {
 		super.onCreate();
 
 		preferencesCookieStore = new PreferencesCookieStore(this);
-
-
 
 		// JPush的初始化
 		JPushInterface.setDebugMode(true);
@@ -123,7 +121,7 @@ public class App extends Application {
 
 					@Override
 					public void onFailure(HttpException arg0, String arg1) {
-						System.out.println("登录失败");
+						System.out.println("连接服务器失败");
 					}
 
 					@Override
@@ -131,25 +129,32 @@ public class App extends Application {
 
 						try {
 							JSONObject replyObject = new JSONObject(arg0.result);
-							JSONObject sessionObject = replyObject
-									.getJSONObject("session");
-							sessionId = sessionObject.getString("sessionId");
-							SharedPreferences preferences = getSharedPreferences(
-									"e_help", Context.MODE_PRIVATE);
-							Editor editor = preferences.edit();
-							editor.putString("sessionId", sessionId);
-							editor.commit();
-							
-							System.out.println("登录成功 session：" + sessionId);
-							
-							handler.postDelayed(new Runnable() {
-								
-								@Override
-								public void run() {
-									login();
-									handler.postDelayed(this, 3000000); 
-								}
-							}, 3000000);
+							String state = replyObject.getString("state");
+							if (state.equals("true")) {
+								JSONObject sessionObject = replyObject
+										.getJSONObject("session");
+								sessionId = sessionObject
+										.getString("sessionId");
+								SharedPreferences preferences = getSharedPreferences(
+										"e_help", Context.MODE_PRIVATE);
+								Editor editor = preferences.edit();
+								editor.putString("sessionId", sessionId);
+								editor.putBoolean("login_status", true);
+								editor.commit();
+
+								System.out.println("登录成功 session：" + sessionId);
+
+								handler.postDelayed(new Runnable() {
+
+									@Override
+									public void run() {
+										login();
+										handler.postDelayed(this, 3000000);
+									}
+								}, 3000000);
+							}else{
+								System.out.println("登陆失败");
+							}
 
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -160,6 +165,5 @@ public class App extends Application {
 
 				});
 	}
-	
-	
+
 }
