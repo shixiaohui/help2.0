@@ -4,6 +4,7 @@ import jeese.helpme.R;
 import jeese.helpme.view.MaterialDialog;
 import jeese.helpme.view.SildingFinishLayout;
 import jeese.helpme.view.SildingFinishLayout.OnSildingFinishListener;
+import jeese.helpme.view.materialedittext.MaterialEditText;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class RegisterPhoneActivity extends ActionBarActivity {
@@ -24,6 +24,7 @@ public class RegisterPhoneActivity extends ActionBarActivity {
 	private Toolbar mToolbar;
 	private SildingFinishLayout mSildingFinishLayout;
 	private MaterialDialog mMaterialDialog;
+	private MaterialEditText phone_edit;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class RegisterPhoneActivity extends ActionBarActivity {
 	private void init() {
 		setToolBar();
 		
+		phone_edit = (MaterialEditText) findViewById(R.id.phone_edit);
+		
 		mMaterialDialog = new MaterialDialog(this)
 	    .setTitle("确认手机号码")
 	    .setMessage("我们将发送验证码短信到这个号码：\n（+86） 156-2618-6016")
@@ -43,9 +46,11 @@ public class RegisterPhoneActivity extends ActionBarActivity {
 	        @Override
 	        public void onClick(View v) {
 	            mMaterialDialog.dismiss();
+	            
 				// 页面跳转到验证码页面
 				Intent intent = new Intent(RegisterPhoneActivity.this,
 						IdentifyActivity.class);
+				intent.putExtra("phone", phone_edit.getText().toString()); 
 				RegisterPhoneActivity.this.startActivity(intent);
 	        }
 	    })
@@ -64,8 +69,6 @@ public class RegisterPhoneActivity extends ActionBarActivity {
 		TextView license = (TextView) findViewById(R.id.license);
 		license.setText(charSequence);
 		license.setMovementMethod(LinkMovementMethod.getInstance());
-
-		EditText phone_edit = (EditText) findViewById(R.id.phone_edit);
 
 		Button phoneButton = (Button) findViewById(R.id.phone_button);
 

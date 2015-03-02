@@ -1,11 +1,26 @@
 package jeese.helpme.auth;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
+
 import jeese.helpme.R;
 import jeese.helpme.activity.MainActivity;
+import jeese.helpme.application.App;
 import jeese.helpme.view.SildingFinishLayout;
 import jeese.helpme.view.SildingFinishLayout.OnSildingFinishListener;
+import jeese.helpme.view.materialedittext.MaterialEditText;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,13 +28,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 
 public class loginActivity extends ActionBarActivity {
 
 	public static Activity loginPhoneActivity;
 	private Toolbar mToolbar;
 	private SildingFinishLayout mSildingFinishLayout;
+	private MaterialEditText password_edit;
+	private MaterialEditText phone_edit;
+	private String phone;
+	private String password;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,19 +51,15 @@ public class loginActivity extends ActionBarActivity {
 	private void init() {
 		setToolBar();
 
-		EditText phone_edit = (EditText) findViewById(R.id.password_edit);
+		phone_edit = (MaterialEditText) findViewById(R.id.phone_edit);
+		password_edit = (MaterialEditText) findViewById(R.id.password_edit);
 
-		Button phoneButton = (Button) findViewById(R.id.finish_button);
-		phoneButton.setOnClickListener(new OnClickListener() {
+		Button finishButton = (Button) findViewById(R.id.finish_button);
+		finishButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// 页面跳转到主页面
-				Intent intent = new Intent(loginActivity.this,
-						MainActivity.class);
-				loginActivity.this.startActivity(intent);
-				StartActivity.StartActivity.finish();
-				finish();
+				login();
 			}
 		});
 
@@ -82,6 +97,73 @@ public class loginActivity extends ActionBarActivity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	private void login() {
+		phone = phone_edit.getText().toString();
+		password = password_edit.getText().toString();
+		
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject.put("cellPhone", phone);
+			jsonObject.put("password", password);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		RequestParams params = new RequestParams();
+		params.addBodyParameter("fields", jsonObject.toString());
+
+		HttpUtils http = new HttpUtils();
+		http.send(HttpRequest.HttpMethod.POST,
+				"http://120.24.208.130:3333/api/auth/login", params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+						System.out.println("连接服务器失败");
+					}
+
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+
+						try {
+							JSONObject replyObject = new JSONObject(arg0.result);
+							String state = replyObject.getString("state");
+							if(state.equals("true")){
+								SharedPreferences preferences = getSharedPreferences(
+										"e_help", Context.MODE_PRIVATE);
+								Editor editor = preferences.edit();
+								editor.putString("cellPhone", phone);
+								editor.putString("password", password);
+								editor.commit();
+								
+								System.out.println("登陆成功");
+								
+								//执行登陆
+								App myApp = ((App) getApplicationContext());
+								myApp.login();
+								
+								// 页面跳转到主页面
+								Intent intent = new Intent(loginActivity.this,
+										MainActivity.class);
+								loginActivity.this.startActivity(intent);
+								StartActivity.StartActivity.finish();
+								finish();
+								
+							}else{
+								System.out.println("登陆失败");
+							}
+
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+
+				});
 	}
 
 }

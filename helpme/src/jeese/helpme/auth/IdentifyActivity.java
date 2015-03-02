@@ -19,12 +19,15 @@ public class IdentifyActivity extends ActionBarActivity {
 	public static Activity IdentifyActivity;
 	private Toolbar mToolbar;
 	private SildingFinishLayout mSildingFinishLayout;
+	private String phone;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.identify_activity);
 		IdentifyActivity = this;
+		Bundle extras = getIntent().getExtras(); 
+		phone = extras.getString("phone"); 
 		init();
 	}
 
@@ -40,6 +43,7 @@ public class IdentifyActivity extends ActionBarActivity {
 				// 页面跳转到注册个人信息页面
 				Intent intent = new Intent(IdentifyActivity.this,
 						RegisterPasswordActivity.class);
+				intent.putExtra("phone", phone); 
 				IdentifyActivity.this.startActivity(intent);
 				RegisterPhoneActivity.RegisterPhoneActivity.finish();
 				finish();
