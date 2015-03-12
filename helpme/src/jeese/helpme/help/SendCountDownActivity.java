@@ -3,6 +3,7 @@ package jeese.helpme.help;
 import java.util.ArrayList;
 
 import jeese.helpme.R;
+import jeese.helpme.util.VibratorUtil;
 import jeese.helpme.view.RippleBackground;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -19,12 +20,20 @@ public class SendCountDownActivity extends ActionBarActivity {
 
 	private Button centerNum;
 	private int time;
+	Handler countDown;
+	Runnable myRunnable;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.send_countdown);
 		init();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		countDown.removeCallbacks(myRunnable);
 	}
 
 	private void init() {
@@ -37,7 +46,6 @@ public class SendCountDownActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				finish();
-				
 			}
 		});
 
@@ -46,8 +54,8 @@ public class SendCountDownActivity extends ActionBarActivity {
 
 		time = 8;
 
-		final Handler countDown = new Handler();
-		Runnable myRunnable= new Runnable(){
+		countDown = new Handler();
+		myRunnable= new Runnable(){
 			@Override
 			public void run() {
 				if (time == 0) {
@@ -56,6 +64,7 @@ public class SendCountDownActivity extends ActionBarActivity {
 					time--;
 					centerNum.setText("" + time);
 					centerNum();
+					VibratorUtil.Vibrate(SendCountDownActivity.this, 400);
 					countDown.postDelayed(this, 1000);
 				}
 			}

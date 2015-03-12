@@ -29,6 +29,7 @@ public class People_Fragment extends Fragment {
 	private SideBar sideBar;
 	private TextView dialog;
 	private People_Listview_Adapter adapter;
+	private Boolean onClick;
 
 	private CharacterParser characterParser;
 	private List<SortModel> SourceDateList;
@@ -40,8 +41,6 @@ public class People_Fragment extends Fragment {
 		mView = View.inflate(getActivity(), R.layout.people_fragment, null);
 		initViews();
 	}
-	
-	
 
 	@Override
 	public void onPause() {
@@ -50,16 +49,13 @@ public class People_Fragment extends Fragment {
 		sideBar.setVisibility(4);
 	}
 
-
-
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		sideBar.setVisibility(0);
+		onClick = false;
 	}
-
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -101,9 +97,12 @@ public class People_Fragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent intent = new Intent(getActivity(),
-						UserDetailsActivity.class);
-				startActivity(intent);
+				if (!onClick) {
+					Intent intent = new Intent(getActivity(),
+							UserDetailsActivity.class);
+					startActivity(intent);
+					onClick = true;
+				}
 			}
 		});
 
