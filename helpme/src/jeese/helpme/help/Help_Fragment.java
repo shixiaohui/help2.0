@@ -121,7 +121,9 @@ public class Help_Fragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 
 		case R.id.help_tab1_helpbutton_1:
-
+			Intent intent_1 = new Intent(getActivity(),
+					SendCountDownActivity.class);
+			startActivity(intent_1);
 			break;
 
 		case R.id.help_tab1_helpbutton_2:

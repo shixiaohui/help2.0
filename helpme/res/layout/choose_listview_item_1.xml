@@ -25,15 +25,15 @@
         android:paddingLeft="16dp" >
 
         <RelativeLayout
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp" >
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="8dp" >
 
             <jeese.helpme.view.CircleImageView
                 android:id="@+id/headimage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2px"
+                android:layout_margin="1px"
                 android:contentDescription="@null" />
 
             <ImageView
@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@null"
                 android:scaleType="fitXY"
-                android:src="@drawable/circle_white_45" />
+                android:src="@drawable/circle_white_49" />
 
             <ImageView
                 android:id="@+id/checkimage"

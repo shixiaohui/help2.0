@@ -17,8 +17,10 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.lidroid.xutils.BitmapUtils;
 
 import jeese.helpme.R;
+import jeese.helpme.people.UserDetailsActivity;
 import jeese.helpme.service.LocationService;
 import jeese.helpme.view.CircleImageView;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -157,8 +159,9 @@ public class Discover_Fragment extends Fragment implements
 	@Override
 	public boolean onMarkerClick(Marker marker) {
 		if (marker.getTitle().toString().contentEquals("icon")) {
-			Toast.makeText(getActivity(), marker.getTitle().toString(),
-					Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(getActivity(),
+					UserDetailsActivity.class);
+			startActivity(intent);
 
 		}
 		return true;

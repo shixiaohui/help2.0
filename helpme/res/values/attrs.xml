@@ -14,7 +14,6 @@
         <attr name="pstsShouldExpand" format="boolean" />
         <attr name="pstsTextAllCaps" format="boolean" />
     </declare-styleable>
-    
     <declare-styleable name="MaterialEditText">
 
         <!-- The base color of the line and the texts. Default is black. -->
@@ -67,6 +66,18 @@
         <attr name="floatingLabelAlwaysShown" format="boolean" />
         <!-- Always show the helper text, no matter if the edit text is focused. -->
         <attr name="helperTextAlwaysShown" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="RippleBackground">
+        <attr name="rb_color" format="color" />
+        <attr name="rb_strokeWidth" format="dimension" />
+        <attr name="rb_radius" format="dimension" />
+        <attr name="rb_duration" format="integer" />
+        <attr name="rb_rippleAmount" format="integer" />
+        <attr name="rb_scale" format="float" />
+        <attr name="rb_type" format="enum">
+            <enum name="fillRipple" value="0" />
+            <enum name="strokeRipple" value="1" />
+        </attr>
     </declare-styleable>
 
 </resources>

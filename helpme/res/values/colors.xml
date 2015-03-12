@@ -52,6 +52,8 @@
     
     <!-- button色 -->
     <color name="colorButton">#099a5a</color>
+    
+    <color name="rippelColor">#0099CC</color>
 	
     <color name="actionbar_selected">#F0F0F0</color>
     <color name="background_tab_pressed">#30037b4a</color>
