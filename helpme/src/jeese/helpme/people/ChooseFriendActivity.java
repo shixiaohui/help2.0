@@ -89,12 +89,12 @@ public class ChooseFriendActivity extends ActionBarActivity {
 					checkId.set(position, false);
 					view.findViewById(R.id.checkimage).setVisibility(4);
 					checknum--;
-					mToolbar.setTitle("选择好友 ( " + checknum + "/ 9 )");
+					mToolbar.setTitle("选择好友 ( " + checknum + " / 9 )");
 				} else if (checknum < 9) {
 					checkId.set(position, true);
 					view.findViewById(R.id.checkimage).setVisibility(0);
 					checknum++;
-					mToolbar.setTitle("选择好友 ( " + checknum + " / 9)");
+					mToolbar.setTitle("选择好友 ( " + checknum + " / 9 )");
 				} else {
 					Toast.makeText(ChooseFriendActivity.this, "最多只能选择9位好友哦！",
 							Toast.LENGTH_SHORT).show();
